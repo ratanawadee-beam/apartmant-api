@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class AmphurEntity {
 
 	@Id
-	private Integer  AmphurId;
+	private Integer AmphurId;
 	private String AmphurCode;
 	private String AmphurNameTh;
 	private String AmphurNameEn;
@@ -44,6 +44,5 @@ public class AmphurEntity {
 	public void setProvinceId(Integer provinceId) {
 		ProvinceId = provinceId;
 	}
-	
-	
+
 }

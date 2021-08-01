@@ -1,6 +1,6 @@
 package com.it.Controller;
 
-import java.sql.Date;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.it.Entity.UserEntity;
 import com.it.Repository.UserRepository;
+import com.it.utils.PasswordEncryptorUtils;
 
 @RestController
 public class UserController {
@@ -29,7 +30,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/{userId}")
-	public ResponseEntity<UserEntity> getUserByuserId(@PathVariable("userId") String userId){
+	public ResponseEntity<UserEntity> getUserByuserId(@PathVariable("userId") Integer userId){
 		Optional<UserEntity> entity = userRepository.findById(userId);
 		if (entity.isPresent()) {
 			return ResponseEntity.ok(entity.get());
@@ -40,16 +41,16 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/save")
-	public ResponseEntity<UserEntity> saveRole(@RequestBody UserEntity request){
+	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity request){
 		if (request != null)  {
 			UserEntity entity = new UserEntity();
 			entity.setUserId(request.getUserId());
 			entity.setUserUsername(request.getUserUsername());
-			entity.setUserPassword(request.getUserPassword());
+			entity.setUserPassword(PasswordEncryptorUtils.passwordEncryptor(request.getUserPassword()));
 			entity.setUserTitle(request.getUserTitle());
 			entity.setUserName(request.getUserName());
 			entity.setUserLasname(request.getUserLasname());
-			entity.setUserBirthday(request.getUserBirthday() != null ? entity.getUserBirthday() : new Date(0));
+			entity.setUserBirthday(request.getUserBirthday());
 			entity.setUserIdcard(request.getUserIdcard());
 			entity.setUserPhone(request.getUserPhone());
 			entity.setUserGender(request.getUserGender());
@@ -57,6 +58,10 @@ public class UserController {
 			entity.setUserEmail(request.getUserEmail());
 			entity.setRoleId(request.getRoleId());
 			entity.setZipCode(request.getZipCode());
+			entity.setProvinceNameTh(request.getProvinceNameTh());
+			entity.setAmphurNameTh(request.getAmphurNameTh());
+			entity.setDistrictNameTh(request.getDistrictNameTh());
+			entity.setRoomName(request.getRoomName());
 			
 	return ResponseEntity.ok(userRepository.save(entity));
 
@@ -85,6 +90,11 @@ public class UserController {
 				updateEntity.setUserEmail(request.getUserEmail());
 				updateEntity.setRoleId(request.getRoleId());
 				updateEntity.setZipCode(request.getZipCode());
+				updateEntity.setAmphurNameTh(request.getAmphurNameTh());
+				updateEntity.setDistrictNameTh(request.getDistrictNameTh());
+				updateEntity.setProvinceNameTh(request.getProvinceNameTh());
+				updateEntity.setRoomName(request.getRoomName());
+				
 				if (request.getUserBirthday() != null) {
 					updateEntity.setUserBirthday(request.getUserBirthday());
 				}

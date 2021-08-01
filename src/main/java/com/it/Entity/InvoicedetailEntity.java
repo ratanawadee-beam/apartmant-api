@@ -12,12 +12,12 @@ import javax.persistence.Table;
 public class InvoicedetailEntity {
 
 	@Id
-	private Integer  deId;
+	private Integer deId;
 	private Date deStartdate;
 	private Date deEnddate;
 	private Integer deWaOld;
 	private Integer deWaNew;
-	private Integer  deLiOld;
+	private Integer deLiOld;
 	private Integer deLiNew;
 	private Integer deTotalunitLi;
 	private Integer deTotalunitWa;

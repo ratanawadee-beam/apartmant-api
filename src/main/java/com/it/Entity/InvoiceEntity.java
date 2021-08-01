@@ -1,19 +1,18 @@
 package com.it.Entity;
 
-
-
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="tb_invoice")
+	@Entity
+	@Table(name="tb_invoice")
+	
 public class InvoiceEntity {
 
 	@Id
-	private Integer InvoiceId;
+	private Integer  InvoiceId;
 	private String InvoiceStetus;
 	private String InvoiceNote;
 	private Date InvoiceStart;
@@ -69,6 +68,5 @@ public class InvoiceEntity {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
 	
 }

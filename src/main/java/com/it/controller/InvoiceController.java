@@ -1,6 +1,5 @@
 package com.it.Controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,8 +44,8 @@ public class InvoiceController {
 			entity.setInvoiceId(request.getInvoiceId());
 			entity.setInvoiceStetus(request.getInvoiceStetus());
 			entity.setInvoiceNote(request.getInvoiceNote());
-			entity.setInvoiceStart(request.getInvoiceStart() != null ? entity.getInvoiceStart() : new Date());
-			entity.setInvoiceEnd(request.getInvoiceEnd() != null ? entity.getInvoiceEnd() : new Date());
+			entity.setInvoiceStart(request.getInvoiceStart());
+			entity.setInvoiceEnd(request.getInvoiceEnd());
 			entity.setRentId(request.getRentId());
 			entity.setRoomId(request.getRoomId());
 			entity.setUserId(request.getUserId());

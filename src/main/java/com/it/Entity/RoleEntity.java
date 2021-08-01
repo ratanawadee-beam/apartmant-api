@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class RoleEntity {
 
 	@Id
-	private String  RoleId;
+	private String RoleId;
 	private String RoleName;
 	private String RoleDescription;
 	private String RoleStatus;

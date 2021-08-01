@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class DistrictEntity {
 
 	@Id
-	private Integer  DistrictId;
+	private Integer DistrictId;
 	private String zipCode;
 	private String DistrictNameTh;
 	private String DistrictNameEn;
