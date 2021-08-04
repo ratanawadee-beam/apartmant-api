@@ -17,7 +17,7 @@ public class InvoiceEntity {
 	private String InvoiceNote;
 	private Date InvoiceStart;
 	private Date InvoiceEnd;
-	private String  rentId;
+	private String rentId;
 	private String roomId;
 	private String userId;
 	public Integer getInvoiceId() {

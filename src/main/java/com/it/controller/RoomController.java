@@ -27,7 +27,7 @@ public class RoomController {
 	}
 	
 	@GetMapping("/room/{roomId}")
-	public ResponseEntity<RoomEntity> getRoomByroomId(@PathVariable("roomId") Integer roomId){
+	public ResponseEntity<RoomEntity> getRoomByroomId(@PathVariable("roomId") String roomId){
 		Optional<RoomEntity> entity = roomRepository.findById(roomId);
 		if (entity.isPresent()) {
 			return ResponseEntity.ok(entity.get());
@@ -44,6 +44,7 @@ public class RoomController {
 			entity.setRoomId(request.getRoomId());
 			entity.setRoomTypename(request.getRoomTypename());
 			entity.setRoomPrice(request.getRoomPrice());
+			entity.setRoomFlow(request.getRoomFlow());
 			entity.setRoomLight(request.getRoomLight());
 			entity.setRoomWater(request.getRoomWater());
 			entity.setRoomStatvs(request.getRoomStatvs());
@@ -66,6 +67,7 @@ public class RoomController {
 				RoomEntity updateEntity = entity.get();
 				updateEntity.setRoomTypename(request.getRoomTypename());
 				updateEntity.setRoomPrice(request.getRoomPrice());
+				updateEntity.setRoomFlow(request.getRoomFlow());
 				updateEntity.setRoomLight(request.getRoomLight());
 				updateEntity.setRoomWater(request.getRoomWater());
 				updateEntity.setRoomStatvs(request.getRoomStatvs());

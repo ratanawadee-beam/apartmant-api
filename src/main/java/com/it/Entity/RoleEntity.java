@@ -5,11 +5,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_role")
+@Table(name="tb_Role")
 public class RoleEntity {
 
 	@Id
-	private String RoleId;
+	private String  RoleId;
 	private String RoleName;
 	private String RoleDescription;
 	private String RoleStatus;
