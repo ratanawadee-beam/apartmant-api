@@ -44,5 +44,5 @@ public class AmphurEntity {
 	public void setProvinceId(Integer provinceId) {
 		ProvinceId = provinceId;
 	}
-
+	
 }

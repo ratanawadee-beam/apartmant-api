@@ -1,9 +1,6 @@
 package com.it.Entity;
 
 
-
-
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,7 +10,7 @@ import javax.persistence.Table;
 public class UserEntity {
 
 	@Id
-	private Integer userId;
+	private String userId;
 	private String userUsername;
 	private String userPassword;
 	private String userTitle;
@@ -27,14 +24,10 @@ public class UserEntity {
 	private String userEmail;
 	private String RoleId;
 	private String zipCode;
-	private String districtNameTh;
-	private String amphurNameTh;
-	private String provinceNameTh;
-	private String roomName;
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getUserUsername() {
@@ -115,29 +108,5 @@ public class UserEntity {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	public String getDistrictNameTh() {
-		return districtNameTh;
-	}
-	public void setDistrictNameTh(String districtNameTh) {
-		this.districtNameTh = districtNameTh;
-	}
-	public String getAmphurNameTh() {
-		return amphurNameTh;
-	}
-	public void setAmphurNameTh(String amphurNameTh) {
-		this.amphurNameTh = amphurNameTh;
-	}
-	public String getProvinceNameTh() {
-		return provinceNameTh;
-	}
-	public void setProvinceNameTh(String provinceNameTh) {
-		this.provinceNameTh = provinceNameTh;
-	}
-	public String getRoomName() {
-		return roomName;
-	}
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
-	}
-
+	
 }
