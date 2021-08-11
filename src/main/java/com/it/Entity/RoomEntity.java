@@ -10,9 +10,9 @@ public class RoomEntity {
 
 	@Id
 	private String  roomId;
+	private String roomName;
 	private String roomTypename;
 	private Integer roomPrice;
-	private String roomFlow;
 	private String  roomLight;
 	private String roomWater;
 	private String roomStatvs;
@@ -21,6 +21,12 @@ public class RoomEntity {
 	}
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
+	}
+	public String getRoomName() {
+		return roomName;
+	}
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 	public String getRoomTypename() {
 		return roomTypename;
@@ -33,12 +39,6 @@ public class RoomEntity {
 	}
 	public void setRoomPrice(Integer roomPrice) {
 		this.roomPrice = roomPrice;
-	}
-	public String getRoomFlow() {
-		return roomFlow;
-	}
-	public void setRoomFlow(String roomFlow) {
-		this.roomFlow = roomFlow;
 	}
 	public String getRoomLight() {
 		return roomLight;
@@ -59,5 +59,4 @@ public class RoomEntity {
 		this.roomStatvs = roomStatvs;
 	}
 
-	
 }

@@ -15,9 +15,7 @@ public class RentEntity {
 	private Date rentStart;
 	private Date rentEnd;
 	private Integer rentInsurance;
-	private String rentWa;
 	private String rentTotalprice;
-	private String rentLi;
 	private String rentOther;
 	private String userId;
 	private String roomId;
@@ -45,23 +43,11 @@ public class RentEntity {
 	public void setRentInsurance(Integer rentInsurance) {
 		this.rentInsurance = rentInsurance;
 	}
-	public String getRentWa() {
-		return rentWa;
-	}
-	public void setRentWa(String rentWa) {
-		this.rentWa = rentWa;
-	}
 	public String getRentTotalprice() {
 		return rentTotalprice;
 	}
 	public void setRentTotalprice(String rentTotalprice) {
 		this.rentTotalprice = rentTotalprice;
-	}
-	public String getRentLi() {
-		return rentLi;
-	}
-	public void setRentLi(String rentLi) {
-		this.rentLi = rentLi;
 	}
 	public String getRentOther() {
 		return rentOther;

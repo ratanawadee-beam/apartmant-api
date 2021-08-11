@@ -81,8 +81,12 @@ public class UserController {
 			entity.setUserGender(request.getUserGender());
 			entity.setUserAddress(request.getUserAddress());
 			entity.setUserEmail(request.getUserEmail());
+			entity.setAmphurNameTh(request.getAmphurNameTh());
+			entity.setDistrictNameTh(request.getDistrictNameTh());
+			entity.setProvinceNameTh(request.getProvinceNameTh());
 			entity.setRoleId(request.getRoleId());
 			entity.setZipCode(request.getZipCode());
+			entity.setRoomName(request.getRoomName());
 			
 	return ResponseEntity.ok(userRepository.save(entity));
 
@@ -112,6 +116,10 @@ public class UserController {
 				updateEntity.setUserEmail(request.getUserEmail());
 				updateEntity.setRoleId(request.getRoleId());
 				updateEntity.setZipCode(request.getZipCode());
+				updateEntity.setAmphurNameTh(request.getAmphurNameTh());
+				updateEntity.setDistrictNameTh(request.getDistrictNameTh());
+				updateEntity.setProvinceNameTh(request.getProvinceNameTh());
+				updateEntity.setRoomName(request.getRoomName());
 				return ResponseEntity.ok(userRepository.save(updateEntity));
 			}else {
 				return ResponseEntity.badRequest().body(null);

@@ -45,7 +45,6 @@ public class RoomController {
 			entity.setRoomName(request.getRoomName());
 			entity.setRoomTypename(request.getRoomTypename());
 			entity.setRoomPrice(request.getRoomPrice());
-			entity.setRoomFlow(request.getRoomFlow());
 			entity.setRoomLight(request.getRoomLight());
 			entity.setRoomWater(request.getRoomWater());
 			entity.setRoomStatvs(request.getRoomStatvs());
@@ -69,7 +68,6 @@ public class RoomController {
 				updateEntity.setRoomName(request.getRoomName());
 				updateEntity.setRoomTypename(request.getRoomTypename());
 				updateEntity.setRoomPrice(request.getRoomPrice());
-				updateEntity.setRoomFlow(request.getRoomFlow());
 				updateEntity.setRoomLight(request.getRoomLight());
 				updateEntity.setRoomWater(request.getRoomWater());
 				updateEntity.setRoomStatvs(request.getRoomStatvs());

@@ -20,9 +20,7 @@ public class RentResponse implements Serializable {
 	private Date rentStart;
 	private Date rentEnd;
 	private Integer rentInsurance;
-	private String rentWa;
 	private String rentTotalprice;
-	private String rentLi;
 	private String rentOther;
 	private String userId;
 	private String roomId;

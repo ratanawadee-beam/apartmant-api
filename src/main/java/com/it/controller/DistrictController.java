@@ -69,7 +69,7 @@ public class DistrictController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/subdistricts/by-zip-code")
+	@GetMapping("/district/by-zip-code")
 	public ResponseEntity<DistrictResponse> getSubdistrictBySdtId(@RequestParam("zipCode") String zipCode){
 		List<DistrictEntity> entities = districtRepository.findAll();
 		if(CollectionUtils.isNotEmpty(entities)) {			

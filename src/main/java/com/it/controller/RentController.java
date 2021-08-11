@@ -85,9 +85,7 @@ public class RentController {
 			entity.setRentStart(request.getRentStart() != null ? entity.getRentStart() : new Date());
 			entity.setRentEnd(request.getRentEnd() != null ? entity.getRentEnd() : new Date());
 			entity.setRentInsurance(request.getRentInsurance());
-			entity.setRentWa(request.getRentWa());
 			entity.setRentTotalprice(request.getRentTotalprice());
-			entity.setRentLi(request.getRentLi());
 			entity.setRentOther(request.getRentOther());
 			entity.setUserId(request.getUserId());
 			entity.setRoomId(request.getRoomId());
@@ -105,9 +103,7 @@ public class RentController {
 			if (entity.isPresent()) {
 				RentEntity updateEntity = entity.get();
 				updateEntity.setRentInsurance(request.getRentInsurance());
-				updateEntity.setRentWa(request.getRentWa());
 				updateEntity.setRentTotalprice(request.getRentTotalprice());
-				updateEntity.setRentLi(request.getRentLi());
 				updateEntity.setRentOther(request.getRentOther());
 				updateEntity.setUserId(request.getUserId());
 				updateEntity.setRoomId(request.getRoomId());

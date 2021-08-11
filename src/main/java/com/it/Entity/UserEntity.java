@@ -21,9 +21,13 @@ public class UserEntity {
 	private String userPhone;
 	private String userGender;
 	private String userAddress;
+	private String DistrictNameTh;
+	private String AmphurNameTh;
+	private String ProvinceNameTh;
 	private String userEmail;
 	private String RoleId;
 	private String zipCode;
+	private String roomName;
 	public String getUserId() {
 		return userId;
 	}
@@ -90,6 +94,24 @@ public class UserEntity {
 	public void setUserAddress(String userAddress) {
 		this.userAddress = userAddress;
 	}
+	public String getDistrictNameTh() {
+		return DistrictNameTh;
+	}
+	public void setDistrictNameTh(String districtNameTh) {
+		DistrictNameTh = districtNameTh;
+	}
+	public String getAmphurNameTh() {
+		return AmphurNameTh;
+	}
+	public void setAmphurNameTh(String amphurNameTh) {
+		AmphurNameTh = amphurNameTh;
+	}
+	public String getProvinceNameTh() {
+		return ProvinceNameTh;
+	}
+	public void setProvinceNameTh(String provinceNameTh) {
+		ProvinceNameTh = provinceNameTh;
+	}
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -108,5 +130,13 @@ public class UserEntity {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	public String getRoomName() {
+		return roomName;
+	}
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+	
+	
 	
 }
