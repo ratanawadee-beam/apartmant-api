@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.it.Entity.RoleEntity;
 import com.it.Entity.UserEntity;
 import com.it.Repository.RoleRepository;
@@ -21,6 +20,7 @@ import com.it.Repository.UserRepository;
 import com.it.model.RoleResponse;
 import com.it.model.UserResponse;
 import com.it.utils.PasswordEncryptorUtils;
+
 
 @RestController
 public class UserController {
@@ -34,6 +34,7 @@ public class UserController {
 	@Autowired 
 	private ModelMapper modelMapper;
 	
+	
 	private UserResponse convertToResponse(UserEntity entity) {
 		UserResponse response = modelMapper.map(entity, UserResponse.class);
 		
@@ -41,9 +42,10 @@ public class UserController {
 		Optional<RoleEntity> roleEntity = roleRepository.findById(entity.getRoleId());
 		if (roleEntity.isPresent()) {
 			response.setRole(modelMapper.map(roleEntity.get(), RoleResponse.class));
-		}
+		}	
 		return response;
 	}
+
 	
 	@GetMapping("/user")
 	public ResponseEntity<List<UserResponse>> getAllUser(){
@@ -55,7 +57,7 @@ public class UserController {
 		}
 	}
 	@GetMapping("/user/{userId}")
-	public ResponseEntity<UserEntity> getUserByuserId(@PathVariable("userId") String userId){
+	public ResponseEntity<UserEntity> getUserByuserId(@PathVariable("userId") Integer userId){
 		Optional<UserEntity> entity = userRepository.findById(userId);
 		if (entity.isPresent()) {
 			return ResponseEntity.ok(entity.get());
@@ -70,8 +72,8 @@ public class UserController {
 		if (request != null)  {
 			UserEntity entity = new UserEntity();
 			entity.setUserId(request.getUserId());
-			entity.setUserUsername(request.getUserUsername());
-			entity.setUserPassword(PasswordEncryptorUtils.passwordEncryptor(request.getUserPassword()));
+			entity.setUserUsername(request.getUserPhone());
+			entity.setUserPassword(PasswordEncryptorUtils.passwordEncryptor(request.getUserPhone()));
 			entity.setUserTitle(request.getUserTitle());
 			entity.setUserName(request.getUserName());
 			entity.setUserLasname(request.getUserLasname());
@@ -81,13 +83,8 @@ public class UserController {
 			entity.setUserGender(request.getUserGender());
 			entity.setUserAddress(request.getUserAddress());
 			entity.setUserEmail(request.getUserEmail());
-			entity.setAmphurNameTh(request.getAmphurNameTh());
-			entity.setDistrictNameTh(request.getDistrictNameTh());
-			entity.setProvinceNameTh(request.getProvinceNameTh());
 			entity.setRoleId(request.getRoleId());
 			entity.setZipCode(request.getZipCode());
-			entity.setRoomName(request.getRoomName());
-			
 	return ResponseEntity.ok(userRepository.save(entity));
 
 		} else {
@@ -116,10 +113,6 @@ public class UserController {
 				updateEntity.setUserEmail(request.getUserEmail());
 				updateEntity.setRoleId(request.getRoleId());
 				updateEntity.setZipCode(request.getZipCode());
-				updateEntity.setAmphurNameTh(request.getAmphurNameTh());
-				updateEntity.setDistrictNameTh(request.getDistrictNameTh());
-				updateEntity.setProvinceNameTh(request.getProvinceNameTh());
-				updateEntity.setRoomName(request.getRoomName());
 				return ResponseEntity.ok(userRepository.save(updateEntity));
 			}else {
 				return ResponseEntity.badRequest().body(null);

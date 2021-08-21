@@ -1,7 +1,5 @@
 package com.it.Entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,8 +10,8 @@ public class RentEntity {
 
 	@Id
 	private Integer rentId;
-	private Date rentStart;
-	private Date rentEnd;
+	private String rentStart;
+	private String rentEnd;
 	private Integer rentInsurance;
 	private String rentTotalprice;
 	private String rentOther;
@@ -25,16 +23,16 @@ public class RentEntity {
 	public void setRentId(Integer rentId) {
 		this.rentId = rentId;
 	}
-	public Date getRentStart() {
+	public String getRentStart() {
 		return rentStart;
 	}
-	public void setRentStart(Date rentStart) {
+	public void setRentStart(String rentStart) {
 		this.rentStart = rentStart;
 	}
-	public Date getRentEnd() {
+	public String getRentEnd() {
 		return rentEnd;
 	}
-	public void setRentEnd(Date rentEnd) {
+	public void setRentEnd(String rentEnd) {
 		this.rentEnd = rentEnd;
 	}
 	public Integer getRentInsurance() {
@@ -68,5 +66,4 @@ public class RentEntity {
 		this.roomId = roomId;
 	}
 	
-
 }

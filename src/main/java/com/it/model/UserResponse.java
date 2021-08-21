@@ -15,7 +15,7 @@ public class UserResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
+	private Integer userId;
 	private String userUsername;
 	private String userPassword;
 	private String userTitle;
@@ -26,15 +26,11 @@ public class UserResponse implements Serializable {
 	private String userPhone;
 	private String userGender;
 	private String userAddress;
-	private String DistrictNameTh;
-	private String AmphurNameTh;
-	private String ProvinceNameTh;
 	private String userEmail;
 	private String RoleId;
 	private String zipCode;
-	private String roomName;
 	private RoleResponse role;
 	private RentResponse rent;
 	private InvoiceResponse invoice;
-	
+
 }

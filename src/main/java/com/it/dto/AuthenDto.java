@@ -11,6 +11,6 @@ public class AuthenDto implements Serializable {
 	
 	private String username;
 	private String password;
-	private String cardId;
+//	private String cardId;
 
 }

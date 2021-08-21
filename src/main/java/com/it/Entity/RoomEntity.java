@@ -9,17 +9,17 @@ import javax.persistence.Table;
 public class RoomEntity {
 
 	@Id
-	private String  roomId;
+	private Integer roomId;
 	private String roomName;
 	private String roomTypename;
 	private Integer roomPrice;
-	private String  roomLight;
+	private String roomLight;
 	private String roomWater;
 	private String roomStatvs;
-	public String getRoomId() {
+	public Integer getRoomId() {
 		return roomId;
 	}
-	public void setRoomId(String roomId) {
+	public void setRoomId(Integer roomId) {
 		this.roomId = roomId;
 	}
 	public String getRoomName() {
@@ -58,5 +58,5 @@ public class RoomEntity {
 	public void setRoomStatvs(String roomStatvs) {
 		this.roomStatvs = roomStatvs;
 	}
-
+	
 }

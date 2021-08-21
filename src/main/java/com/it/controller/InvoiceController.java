@@ -48,25 +48,27 @@ public class InvoiceController {
 	
 	private InvoiceResponse convertToResponse(InvoiceEntity entity) {
 		InvoiceResponse response = modelMapper.map(entity, InvoiceResponse.class);
-		
-		//set rent
+
+		// set rent
 		Optional<RentEntity> rentEntity = rentRepository.findById(Integer.valueOf(entity.getRentId()));
 		if (rentEntity.isPresent()) {
 			response.setRent(modelMapper.map(rentEntity.get(), RentResponse.class));
 		}
-		
-		//set room
-				Optional<RoomEntity> roomEntity = roomRepository.findById(entity.getRoomId());
-				if (roomEntity.isPresent()) {
-					response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
-				}
-			
-		//set user
-				Optional<UserEntity> userEntity = userRepository.findById(entity.getUserId());
-				if (userEntity.isPresent()) {
-					response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
-				}	
-				
+
+		// set user
+		Optional<UserEntity> userEntity = userRepository.findById(Integer.valueOf(entity.getUserId()));
+		if (userEntity.isPresent()) {
+			response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
+		}
+		//set room	
+		Optional<RoomEntity> roomEntity = roomRepository.findById(Integer.valueOf(entity.getRoomId()));// ถ้าเป็น
+																										// autokey
+																										// ให้ใส่
+																										// Integer.valueOf
+		if (roomEntity.isPresent()) {
+			response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
+		}
+
 		return response;
 	}
 	
