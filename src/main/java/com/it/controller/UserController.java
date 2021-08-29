@@ -17,6 +17,7 @@ import com.it.Entity.RoleEntity;
 import com.it.Entity.UserEntity;
 import com.it.Repository.RoleRepository;
 import com.it.Repository.UserRepository;
+import com.it.dto.UserDto;
 import com.it.model.RoleResponse;
 import com.it.model.UserResponse;
 import com.it.utils.PasswordEncryptorUtils;
@@ -33,6 +34,9 @@ public class UserController {
 	
 	@Autowired 
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private RentController rentController;
 	
 	
 	private UserResponse convertToResponse(UserEntity entity) {
@@ -68,11 +72,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/save")
-	public ResponseEntity<UserEntity> saveRole(@RequestBody UserEntity request){
+	public ResponseEntity<UserEntity> saveRole(@RequestBody UserDto request){
 		if (request != null)  {
+			String[] parts = request.getUserEmail().split("@");
 			UserEntity entity = new UserEntity();
 			entity.setUserId(request.getUserId());
-			entity.setUserUsername(request.getUserPhone());
+			entity.setUserUsername(parts[0]);
 			entity.setUserPassword(PasswordEncryptorUtils.passwordEncryptor(request.getUserPhone()));
 			entity.setUserTitle(request.getUserTitle());
 			entity.setUserName(request.getUserName());
@@ -85,6 +90,7 @@ public class UserController {
 			entity.setUserEmail(request.getUserEmail());
 			entity.setRoleId(request.getRoleId());
 			entity.setZipCode(request.getZipCode());
+//			rentController.saveRent(request)
 	return ResponseEntity.ok(userRepository.save(entity));
 
 		} else {
