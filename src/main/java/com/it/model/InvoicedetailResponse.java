@@ -17,15 +17,12 @@ public class InvoicedetailResponse  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer  deId;
-	private Date deStartdate;
-	private Date deEnddate;
-	private Integer deWaOld;
+	private String deStartdate;
+	private String deEnddate;
 	private Integer deWaNew;
-	private Integer deLiOld;
 	private Integer deLiNew;
 	private Integer deTotalunitLi;
 	private Integer deTotalunitWa;
-	private String deTotalroom;
 	private String deTotalLi;
 	private String deTotalWa;
 	private String deTotal;

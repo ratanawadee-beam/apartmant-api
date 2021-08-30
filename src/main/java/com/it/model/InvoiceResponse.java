@@ -19,8 +19,8 @@ public class InvoiceResponse implements Serializable {
 	private Integer  InvoiceId;
 	private String InvoiceStetus;
 	private String InvoiceNote;
-	private Date InvoiceStart;
-	private Date InvoiceEnd;
+	private String InvoiceStart;
+	private String InvoiceEnd;
 	private String rentId;
 	private String roomId;
 	private String userId;

@@ -15,8 +15,8 @@ public class InvoiceEntity {
 	private Integer  InvoiceId;
 	private String InvoiceStetus;
 	private String InvoiceNote;
-	private Date InvoiceStart;
-	private Date InvoiceEnd;
+	private String InvoiceStart;
+	private String InvoiceEnd;
 	private String rentId;
 	private String roomId;
 	private String userId;
@@ -38,16 +38,16 @@ public class InvoiceEntity {
 	public void setInvoiceNote(String invoiceNote) {
 		InvoiceNote = invoiceNote;
 	}
-	public Date getInvoiceStart() {
+	public String getInvoiceStart() {
 		return InvoiceStart;
 	}
-	public void setInvoiceStart(Date invoiceStart) {
+	public void setInvoiceStart(String invoiceStart) {
 		InvoiceStart = invoiceStart;
 	}
-	public Date getInvoiceEnd() {
+	public String getInvoiceEnd() {
 		return InvoiceEnd;
 	}
-	public void setInvoiceEnd(Date invoiceEnd) {
+	public void setInvoiceEnd(String invoiceEnd) {
 		InvoiceEnd = invoiceEnd;
 	}
 	public String getRentId() {

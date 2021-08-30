@@ -123,12 +123,8 @@ public class InvoiceController {
 				InvoiceEntity updateEntity = entity.get();
 				updateEntity.setInvoiceStetus(request.getInvoiceStetus());
 				updateEntity.setInvoiceNote(request.getInvoiceNote());
-				if (request.getInvoiceStart() != null) {
-					updateEntity.setInvoiceStart(request.getInvoiceStart());
-				}
-				if (request.getInvoiceEnd() != null) {
-					updateEntity.setInvoiceEnd(request.getInvoiceEnd());
-				}
+				updateEntity.setInvoiceStart(request.getInvoiceStart());
+				updateEntity.setInvoiceEnd(request.getInvoiceEnd());
 				updateEntity.setRentId(request.getRentId());
 				updateEntity.setRoomId(request.getRoomId());
 				updateEntity.setUserId(request.getUserId());

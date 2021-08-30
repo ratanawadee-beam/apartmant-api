@@ -74,15 +74,12 @@ public class InvoicedetailController {
 		if (request != null) {
 			InvoicedetailEntity entity = new InvoicedetailEntity();
 			entity.setDeId(request.getDeId());
-			entity.setDeStartdate(request.getDeStartdate() != null ? entity.getDeStartdate() : new Date());
-			entity.setDeStartdate(request.getDeEnddate() != null ? entity.getDeEnddate() : new Date());
-			entity.setDeWaOld(request.getDeWaOld());
+			entity.setDeStartdate(request.getDeStartdate());
+			entity.setDeEnddate(request.getDeEnddate());
 			entity.setDeWaNew(request.getDeWaNew());
-			entity.setDeLiOld(request.getDeLiOld());
 			entity.setDeLiNew(request.getDeLiNew());
 			entity.setDeTotalunitLi(request.getDeTotalunitLi());
 			entity.setDeTotalunitWa(request.getDeTotalunitWa());
-			entity.setDeTotalroom(request.getDeTotalroom());
 			entity.setDeTotalLi(request.getDeTotalLi());
 			entity.setDeTotalWa(request.getDeTotalWa());
 			entity.setDeTotal(request.getDeTotal());
@@ -100,24 +97,17 @@ public class InvoicedetailController {
 			Optional<InvoicedetailEntity> entity = invoicedetailRepository.findById(request.getDeId());
 			if (entity.isPresent()) {
 				InvoicedetailEntity updateEntity = entity.get();
-				updateEntity.setDeWaOld(request.getDeWaOld());
 				updateEntity.setDeWaNew(request.getDeWaNew());
-				updateEntity.setDeLiOld(request.getDeLiOld());
 				updateEntity.setDeLiNew(request.getDeLiNew());
 				updateEntity.setDeTotalunitLi(request.getDeTotalunitLi());
 				updateEntity.setDeTotalunitWa(request.getDeTotalunitWa());
-				updateEntity.setDeTotalroom(request.getDeTotalroom());
 				updateEntity.setDeTotalLi(request.getDeTotalLi());
 				updateEntity.setDeTotalWa(request.getDeTotalWa());
 				updateEntity.setDeTotal(request.getDeTotal());
 				updateEntity.setDeUnpaid(request.getDeUnpaid());
 				updateEntity.setRentId(request.getRentId());
-				if (request.getDeStartdate() != null) {
-					updateEntity.setDeStartdate(request.getDeStartdate());
-				}
-				if (request.getDeEnddate() != null) {
-					updateEntity.setDeEnddate(request.getDeEnddate());
-				}
+				updateEntity.setDeStartdate(request.getDeStartdate());
+				updateEntity.setDeEnddate(request.getDeEnddate());
 				return ResponseEntity.ok(invoicedetailRepository.save(updateEntity));
 			}else {
 				return ResponseEntity.badRequest().body(null);
