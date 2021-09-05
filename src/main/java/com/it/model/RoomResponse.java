@@ -16,7 +16,6 @@ public class RoomResponse implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String  roomId;
-	private String roomName;
 	private String roomTypename;
 	private Integer roomPrice;
 	private String  roomLight;

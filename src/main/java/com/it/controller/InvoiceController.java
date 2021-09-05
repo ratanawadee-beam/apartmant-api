@@ -61,7 +61,7 @@ public class InvoiceController {
 			response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
 		}
 		//set room	
-		Optional<RoomEntity> roomEntity = roomRepository.findById(Integer.valueOf(entity.getRoomId()));// ถ้าเป็น
+		Optional<RoomEntity> roomEntity = roomRepository.findById(String.valueOf(entity.getRoomId()));// ถ้าเป็น
 																										// autokey
 																										// ให้ใส่
 																										// Integer.valueOf
