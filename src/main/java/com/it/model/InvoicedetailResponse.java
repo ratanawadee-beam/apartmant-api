@@ -26,8 +26,9 @@ public class InvoicedetailResponse  implements Serializable {
 	private String deTotalLi;
 	private String deTotalWa;
 	private String deTotal;
-	private String deUnpaid;
 	private String rentId;
+	private String InvoiceId;
+	private InvoiceResponse invoice;
 	private RentResponse rent;
 	
 	

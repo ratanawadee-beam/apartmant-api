@@ -56,7 +56,7 @@ public class InvoiceController {
 		}
 
 		// set user
-		Optional<UserEntity> userEntity = userRepository.findById(Integer.valueOf(entity.getUserId()));
+		Optional<UserEntity> userEntity = userRepository.findById(String.valueOf(entity.getUserId()));
 		if (userEntity.isPresent()) {
 			response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
 		}

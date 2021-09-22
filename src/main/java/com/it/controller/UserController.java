@@ -62,7 +62,7 @@ public class UserController {
 		}
 	}
 	@GetMapping("/user/{userId}")
-	public ResponseEntity<UserEntity> getUserByuserId(@PathVariable("userId") Integer userId){
+	public ResponseEntity<UserEntity> getUserByuserId(@PathVariable("userId") String userId){
 		Optional<UserEntity> entity = userRepository.findById(userId);
 		if (entity.isPresent()) {
 			return ResponseEntity.ok(entity.get());
@@ -131,7 +131,7 @@ public class UserController {
 		}
 	@DeleteMapping("/user/{userId}")
 	public ResponseEntity<String> deleteUserByUserId(@PathVariable("userId") String userId) {
-		userRepository.deleteById(Integer.valueOf(userId));
+		userRepository.deleteById(String.valueOf(userId));
 		return ResponseEntity.ok("SUCCESS");
 	}
 }//end

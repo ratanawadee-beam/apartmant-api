@@ -15,6 +15,8 @@ public class RentEntity {
 	private Integer rentInsurance;
 	private String rentTotalprice;
 	private String rentOther;
+	private String rentLi;
+	private String rentWa;
 	private String userId;
 	private String roomId;
 	public Integer getRentId() {
@@ -52,6 +54,18 @@ public class RentEntity {
 	}
 	public void setRentOther(String rentOther) {
 		this.rentOther = rentOther;
+	}
+	public String getRentLi() {
+		return rentLi;
+	}
+	public void setRentLi(String rentLi) {
+		this.rentLi = rentLi;
+	}
+	public String getRentWa() {
+		return rentWa;
+	}
+	public void setRentWa(String rentWa) {
+		this.rentWa = rentWa;
 	}
 	public String getUserId() {
 		return userId;

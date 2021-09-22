@@ -83,7 +83,7 @@ public class InvoicedetailController {
 			entity.setDeTotalLi(request.getDeTotalLi());
 			entity.setDeTotalWa(request.getDeTotalWa());
 			entity.setDeTotal(request.getDeTotal());
-			entity.setDeUnpaid(request.getDeUnpaid());
+			entity.setInvoiceId(request.getInvoiceId());
 			entity.setRentId(request.getRentId());
 		return ResponseEntity.ok(invoicedetailRepository.save(entity));
 		}else {
@@ -104,7 +104,7 @@ public class InvoicedetailController {
 				updateEntity.setDeTotalLi(request.getDeTotalLi());
 				updateEntity.setDeTotalWa(request.getDeTotalWa());
 				updateEntity.setDeTotal(request.getDeTotal());
-				updateEntity.setDeUnpaid(request.getDeUnpaid());
+				updateEntity.setInvoiceId(request.getInvoiceId());
 				updateEntity.setRentId(request.getRentId());
 				updateEntity.setDeStartdate(request.getDeStartdate());
 				updateEntity.setDeEnddate(request.getDeEnddate());

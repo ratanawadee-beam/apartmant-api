@@ -21,6 +21,8 @@ public class RentResponse implements Serializable {
 	private Integer rentInsurance;
 	private String rentTotalprice;
 	private String rentOther;
+	private String rentWa;
+	private String rentLi;
 	private String userId;
 	private String roomId;
 	private UserResponse user;

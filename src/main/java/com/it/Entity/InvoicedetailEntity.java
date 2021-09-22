@@ -22,8 +22,8 @@ public class InvoicedetailEntity {
 	private String deTotalLi;
 	private String deTotalWa;
 	private String deTotal;
-	private String deUnpaid;
 	private String rentId;
+	private String InvoiceId;
 	public Integer getDeId() {
 		return deId;
 	}
@@ -84,17 +84,17 @@ public class InvoicedetailEntity {
 	public void setDeTotal(String deTotal) {
 		this.deTotal = deTotal;
 	}
-	public String getDeUnpaid() {
-		return deUnpaid;
-	}
-	public void setDeUnpaid(String deUnpaid) {
-		this.deUnpaid = deUnpaid;
-	}
 	public String getRentId() {
 		return rentId;
 	}
 	public void setRentId(String rentId) {
 		this.rentId = rentId;
+	}
+	public String getInvoiceId() {
+		return InvoiceId;
+	}
+	public void setInvoiceId(String invoiceId) {
+		InvoiceId = invoiceId;
 	}
 	
 }

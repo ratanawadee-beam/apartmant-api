@@ -8,6 +8,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +45,7 @@ public class RentController {
 		RentResponse response = modelMapper.map(entity, RentResponse.class);
 		
 		//set user
-				Optional<UserEntity> userEntity = userRepository.findById(Integer.valueOf(entity.getUserId()));
+				Optional<UserEntity> userEntity = userRepository.findById(String.valueOf(entity.getUserId()));
 				if (userEntity.isPresent()) {
 					response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
 				}
@@ -86,6 +87,8 @@ public class RentController {
 			entity.setRentInsurance(request.getRentInsurance());
 			entity.setRentTotalprice(request.getRentTotalprice());
 			entity.setRentOther(request.getRentOther());
+			entity.setRentLi(request.getRentLi());
+			entity.setRentWa(request.getRentWa());
 			entity.setUserId(request.getUserId());
 			entity.setRoomId(request.getRoomId());
 			
@@ -106,6 +109,8 @@ public class RentController {
 				updateEntity.setRentOther(request.getRentOther());
 				updateEntity.setRentStart(request.getRentStart());
 				updateEntity.setRentEnd(request.getRentEnd());
+				updateEntity.setRentLi(request.getRentLi());
+				updateEntity.setRentWa(request.getRentWa());
 				updateEntity.setUserId(request.getUserId());
 				updateEntity.setRoomId(request.getRoomId());
 				return ResponseEntity.ok(rentRepository.save(updateEntity));
@@ -115,5 +120,10 @@ public class RentController {
 		}else {
 			return ResponseEntity.badRequest().body(null);
 		}
+	}
+	@DeleteMapping("/rent/{rentId}")
+	public ResponseEntity<String> deleteRentByRentId(@PathVariable("rentId") String rentId) {
+		rentRepository.deleteById(Integer.valueOf(rentId));
+		return ResponseEntity.ok("SUCCESS");
 	}
 }

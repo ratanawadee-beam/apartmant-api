@@ -2,7 +2,7 @@ package com.it.dto;
 
 public class UserDto {
 	
-	private Integer userId;
+	private String userId;
 	private String userTitle;
 	private String userName;
 	private String userLasname;
@@ -14,10 +14,10 @@ public class UserDto {
 	private String userEmail;
 	private String RoleId;
 	private String zipCode;
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getUserTitle() {
