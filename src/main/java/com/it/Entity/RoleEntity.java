@@ -9,35 +9,33 @@ import javax.persistence.Table;
 public class RoleEntity {
 
 	@Id
-	private String  RoleId;
-	private String RoleName;
-	private String RoleDescription;
-	private String RoleStatus;
+	private String  roleId;
+	private String roleName;
+	private String roleDescription;
+	private String roleStatus;
 	public String getRoleId() {
-		return RoleId;
+		return roleId;
 	}
 	public void setRoleId(String roleId) {
-		RoleId = roleId;
+		this.roleId = roleId;
 	}
 	public String getRoleName() {
-		return RoleName;
+		return roleName;
 	}
 	public void setRoleName(String roleName) {
-		RoleName = roleName;
+		this.roleName = roleName;
 	}
 	public String getRoleDescription() {
-		return RoleDescription;
+		return roleDescription;
 	}
 	public void setRoleDescription(String roleDescription) {
-		RoleDescription = roleDescription;
+		this.roleDescription = roleDescription;
 	}
 	public String getRoleStatus() {
-		return RoleStatus;
+		return roleStatus;
 	}
 	public void setRoleStatus(String roleStatus) {
-		RoleStatus = roleStatus;
+		this.roleStatus = roleStatus;
 	}
-	
-	
-	
+
 }

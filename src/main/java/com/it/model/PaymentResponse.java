@@ -19,6 +19,6 @@ public class PaymentResponse implements Serializable {
 	private Integer  payId;
 	private Date payDate;
 	private String payTotal;
-	private Integer InvoiceId;
+	private Integer InId;
 	private InvoiceResponse invoice;
 }

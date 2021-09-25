@@ -12,61 +12,40 @@ import javax.persistence.Table;
 public class InvoiceEntity {
 
 	@Id
-	private Integer  InvoiceId;
-	private String InvoiceStetus;
-	private String InvoiceNote;
-	private String InvoiceStart;
-	private String InvoiceEnd;
+	private Integer  InId;
+	private String InStetus;
+	private String InStart;
+	private String InEnd;
 	private String rentId;
-	private String roomId;
-	private String userId;
-	public Integer getInvoiceId() {
-		return InvoiceId;
+	public Integer getInId() {
+		return InId;
 	}
-	public void setInvoiceId(Integer invoiceId) {
-		InvoiceId = invoiceId;
+	public void setInId(Integer inId) {
+		InId = inId;
 	}
-	public String getInvoiceStetus() {
-		return InvoiceStetus;
+	public String getInStetus() {
+		return InStetus;
 	}
-	public void setInvoiceStetus(String invoiceStetus) {
-		InvoiceStetus = invoiceStetus;
+	public void setInStetus(String inStetus) {
+		InStetus = inStetus;
 	}
-	public String getInvoiceNote() {
-		return InvoiceNote;
+	public String getInStart() {
+		return InStart;
 	}
-	public void setInvoiceNote(String invoiceNote) {
-		InvoiceNote = invoiceNote;
+	public void setInStart(String inStart) {
+		InStart = inStart;
 	}
-	public String getInvoiceStart() {
-		return InvoiceStart;
+	public String getInEnd() {
+		return InEnd;
 	}
-	public void setInvoiceStart(String invoiceStart) {
-		InvoiceStart = invoiceStart;
-	}
-	public String getInvoiceEnd() {
-		return InvoiceEnd;
-	}
-	public void setInvoiceEnd(String invoiceEnd) {
-		InvoiceEnd = invoiceEnd;
+	public void setInEnd(String inEnd) {
+		InEnd = inEnd;
 	}
 	public String getRentId() {
 		return rentId;
 	}
 	public void setRentId(String rentId) {
 		this.rentId = rentId;
-	}
-	public String getRoomId() {
-		return roomId;
-	}
-	public void setRoomId(String roomId) {
-		this.roomId = roomId;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 	
 }

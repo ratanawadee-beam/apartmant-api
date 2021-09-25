@@ -13,70 +13,78 @@ public class InvoicedetailEntity {
 
 	@Id
 	private Integer deId;
-	private String deStartdate;
-	private String deEnddate;
-	private Integer deWaNew;
-	private Integer deLiNew;
-	private Integer deTotalunitLi;
-	private Integer deTotalunitWa;
-	private String deTotalLi;
-	private String deTotalWa;
+	private String deWaold;
+	private String deLiold;
+	private Integer deWanew;
+	private Integer deLinew;
+	private Integer totalunitLi;
+	private Integer totalunitWa;
+	private String totalRoom;
+	private String totalLi;
+	private String totalWa;
 	private String deTotal;
-	private String rentId;
-	private String InvoiceId;
+	private String InStart;
+	private String InEnd;
+	private String InId;
 	public Integer getDeId() {
 		return deId;
 	}
 	public void setDeId(Integer deId) {
 		this.deId = deId;
 	}
-	public String getDeStartdate() {
-		return deStartdate;
+	public String getDeWaold() {
+		return deWaold;
 	}
-	public void setDeStartdate(String deStartdate) {
-		this.deStartdate = deStartdate;
+	public void setDeWaold(String deWaold) {
+		this.deWaold = deWaold;
 	}
-	public String getDeEnddate() {
-		return deEnddate;
+	public String getDeLiold() {
+		return deLiold;
 	}
-	public void setDeEnddate(String deEnddate) {
-		this.deEnddate = deEnddate;
+	public void setDeLiold(String deLiold) {
+		this.deLiold = deLiold;
 	}
-	public Integer getDeWaNew() {
-		return deWaNew;
+	public Integer getDeWanew() {
+		return deWanew;
 	}
-	public void setDeWaNew(Integer deWaNew) {
-		this.deWaNew = deWaNew;
+	public void setDeWanew(Integer deWanew) {
+		this.deWanew = deWanew;
 	}
-	public Integer getDeLiNew() {
-		return deLiNew;
+	public Integer getDeLinew() {
+		return deLinew;
 	}
-	public void setDeLiNew(Integer deLiNew) {
-		this.deLiNew = deLiNew;
+	public void setDeLinew(Integer deLinew) {
+		this.deLinew = deLinew;
 	}
-	public Integer getDeTotalunitLi() {
-		return deTotalunitLi;
+	public Integer getTotalunitLi() {
+		return totalunitLi;
 	}
-	public void setDeTotalunitLi(Integer deTotalunitLi) {
-		this.deTotalunitLi = deTotalunitLi;
+	public void setTotalunitLi(Integer totalunitLi) {
+		this.totalunitLi = totalunitLi;
 	}
-	public Integer getDeTotalunitWa() {
-		return deTotalunitWa;
+	public Integer getTotalunitWa() {
+		return totalunitWa;
 	}
-	public void setDeTotalunitWa(Integer deTotalunitWa) {
-		this.deTotalunitWa = deTotalunitWa;
+	public void setTotalunitWa(Integer totalunitWa) {
+		this.totalunitWa = totalunitWa;
 	}
-	public String getDeTotalLi() {
-		return deTotalLi;
+	public String getTotalRoom() {
+		return totalRoom;
 	}
-	public void setDeTotalLi(String deTotalLi) {
-		this.deTotalLi = deTotalLi;
+	public void setTotalRoom(String totalRoom) {
+		this.totalRoom = totalRoom;
 	}
-	public String getDeTotalWa() {
-		return deTotalWa;
+	public String getTotalLi() {
+		return totalLi;
 	}
-	public void setDeTotalWa(String deTotalWa) {
-		this.deTotalWa = deTotalWa;
+	public void setTotalLi(String totalLi) {
+		this.totalLi = totalLi;
+	}
+	public String getTotalWa() {
+		return totalWa;
+	}
+	public void setTotalWa(String totalWa) {
+		this.totalWa = totalWa;
 	}
 	public String getDeTotal() {
 		return deTotal;
@@ -84,17 +92,23 @@ public class InvoicedetailEntity {
 	public void setDeTotal(String deTotal) {
 		this.deTotal = deTotal;
 	}
-	public String getRentId() {
-		return rentId;
+	public String getInStart() {
+		return InStart;
 	}
-	public void setRentId(String rentId) {
-		this.rentId = rentId;
+	public void setInStart(String inStart) {
+		InStart = inStart;
 	}
-	public String getInvoiceId() {
-		return InvoiceId;
+	public String getInEnd() {
+		return InEnd;
 	}
-	public void setInvoiceId(String invoiceId) {
-		InvoiceId = invoiceId;
+	public void setInEnd(String inEnd) {
+		InEnd = inEnd;
+	}
+	public String getInId() {
+		return InId;
+	}
+	public void setInId(String inId) {
+		InId = inId;
 	}
 	
 }

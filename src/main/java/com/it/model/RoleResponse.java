@@ -15,8 +15,8 @@ public class RoleResponse implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String  RoleId;
-	private String RoleName;
-	private String RoleDescription;
-	private String RoleStatus;
+	private String roleId;
+	private String roleName;
+	private String roleDescription;
+	private String roleStatus;
 }

@@ -3,6 +3,8 @@ package com.it.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,20 +18,19 @@ public class InvoicedetailResponse  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer  deId;
-	private String deStartdate;
-	private String deEnddate;
+	private Integer deId;
+	private String deWaold;
+	private String deLiold;
 	private Integer deWaNew;
 	private Integer deLiNew;
-	private Integer deTotalunitLi;
-	private Integer deTotalunitWa;
-	private String deTotalLi;
-	private String deTotalWa;
+	private Integer totalunitLi;
+	private Integer totalunitWa;
+	private String totalRoom;
+	private String totalLi;
+	private String totalWa;
 	private String deTotal;
-	private String rentId;
-	private String InvoiceId;
+	private String InStart;
+	private String InEnd;
+	private String InId;
 	private InvoiceResponse invoice;
-	private RentResponse rent;
-	
-	
 }

@@ -38,7 +38,7 @@ public class PaymentController {
 		PaymentResponse response = modelMapper.map(entity, PaymentResponse.class);
 		
 		//set invoice
-				Optional<InvoiceEntity> invoiceEntity = invoiceRepository.findById(Integer.valueOf(entity.getInvoiceId()));
+				Optional<InvoiceEntity> invoiceEntity = invoiceRepository.findById(Integer.valueOf(entity.getInId()));
 				if (invoiceEntity.isPresent()) {
 					response.setInvoice(modelMapper.map(invoiceEntity.get(), InvoiceResponse.class));
 				}
@@ -73,7 +73,7 @@ public class PaymentController {
 			entity.setPayId(request.getPayId());
 			entity.setPayDate(request.getPayDate() != null ? entity.getPayDate() : new Date());
 			entity.setPayTotal(request.getPayTotal());
-			entity.setInvoiceId(request.getInvoiceId());
+			entity.setInId(request.getInId());
 	return ResponseEntity.ok(paymentRepository.save(entity));
 
 		} else {
@@ -90,7 +90,7 @@ public class PaymentController {
 				//set update data form request
 				PaymentEntity updateEntity = entity.get();
 				updateEntity.setPayTotal(request.getPayTotal());
-				updateEntity.setInvoiceId(request.getInvoiceId());
+				updateEntity.setInId(request.getInId());
 				if (request.getPayDate() != null) {
 					updateEntity.setPayDate(request.getPayDate());
 				}

@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.it.Entity.InvoiceEntity;
 import com.it.Entity.InvoicedetailEntity;
 import com.it.Entity.RentEntity;
+import com.it.Repository.InvoiceRepository;
 import com.it.Repository.InvoicedetailRepository;
 import com.it.Repository.RentRepository;
+import com.it.model.InvoiceResponse;
 import com.it.model.InvoicedetailResponse;
 import com.it.model.RentResponse;
 
@@ -30,8 +32,7 @@ public class InvoicedetailController {
 	@Autowired
 	private InvoicedetailRepository invoicedetailRepository;
 	
-	@Autowired
-	private RentRepository rentRepository;
+	@Autowired InvoiceRepository invoiceRepository;
 	
 	
 	@Autowired 
@@ -40,12 +41,11 @@ public class InvoicedetailController {
 	private InvoicedetailResponse convertToResponse(InvoicedetailEntity entity) {
 		InvoicedetailResponse response = modelMapper.map(entity, InvoicedetailResponse.class);
 		
-		//set rent
-		Optional<RentEntity> rentEntity = rentRepository.findById(Integer.valueOf(entity.getRentId()));
-		if (rentEntity.isPresent()) {
-			response.setRent(modelMapper.map(rentEntity.get(), RentResponse.class));
-		}	
-		
+		//set invoice
+		Optional<InvoiceEntity> invoiceEntity = invoiceRepository.findById(Integer.valueOf(entity.getInId()));
+		if (invoiceEntity.isPresent()) {
+			response.setInvoice(modelMapper.map(invoiceEntity.get(), InvoiceResponse.class));
+		}
 		return response;
   }
 	
@@ -74,17 +74,18 @@ public class InvoicedetailController {
 		if (request != null) {
 			InvoicedetailEntity entity = new InvoicedetailEntity();
 			entity.setDeId(request.getDeId());
-			entity.setDeStartdate(request.getDeStartdate());
-			entity.setDeEnddate(request.getDeEnddate());
-			entity.setDeWaNew(request.getDeWaNew());
-			entity.setDeLiNew(request.getDeLiNew());
-			entity.setDeTotalunitLi(request.getDeTotalunitLi());
-			entity.setDeTotalunitWa(request.getDeTotalunitWa());
-			entity.setDeTotalLi(request.getDeTotalLi());
-			entity.setDeTotalWa(request.getDeTotalWa());
+			entity.setDeWaold(request.getDeWaold());
+			entity.setDeLiold(request.getDeLiold());
+			entity.setDeWanew(request.getDeWanew());
+			entity.setDeLinew(request.getDeLinew());
+			entity.setTotalunitLi(request.getTotalunitLi());
+			entity.setTotalunitWa(request.getTotalunitWa());
+			entity.setTotalRoom(request.getTotalRoom());
+			entity.setTotalLi(request.getTotalLi());
+			entity.setTotalWa(request.getTotalWa());
 			entity.setDeTotal(request.getDeTotal());
-			entity.setInvoiceId(request.getInvoiceId());
-			entity.setRentId(request.getRentId());
+			entity.setInStart(request.getInStart());
+			entity.setInEnd(request.getInEnd());
 		return ResponseEntity.ok(invoicedetailRepository.save(entity));
 		}else {
 			return ResponseEntity.badRequest().body(null);
@@ -97,17 +98,18 @@ public class InvoicedetailController {
 			Optional<InvoicedetailEntity> entity = invoicedetailRepository.findById(request.getDeId());
 			if (entity.isPresent()) {
 				InvoicedetailEntity updateEntity = entity.get();
-				updateEntity.setDeWaNew(request.getDeWaNew());
-				updateEntity.setDeLiNew(request.getDeLiNew());
-				updateEntity.setDeTotalunitLi(request.getDeTotalunitLi());
-				updateEntity.setDeTotalunitWa(request.getDeTotalunitWa());
-				updateEntity.setDeTotalLi(request.getDeTotalLi());
-				updateEntity.setDeTotalWa(request.getDeTotalWa());
+				updateEntity.setDeWaold(request.getDeWaold());
+				updateEntity.setDeLiold(request.getDeLiold());
+				updateEntity.setDeWanew(request.getDeWanew());
+				updateEntity.setDeLinew(request.getDeLinew());
+				updateEntity.setTotalunitLi(request.getTotalunitLi());
+				updateEntity.setTotalunitWa(request.getTotalunitWa());
+				updateEntity.setTotalRoom(request.getTotalRoom());
+				updateEntity.setTotalLi(request.getTotalLi());
+				updateEntity.setTotalWa(request.getTotalWa());
 				updateEntity.setDeTotal(request.getDeTotal());
-				updateEntity.setInvoiceId(request.getInvoiceId());
-				updateEntity.setRentId(request.getRentId());
-				updateEntity.setDeStartdate(request.getDeStartdate());
-				updateEntity.setDeEnddate(request.getDeEnddate());
+				updateEntity.setInStart(request.getInStart());
+				updateEntity.setInEnd(request.getInEnd());			
 				return ResponseEntity.ok(invoicedetailRepository.save(updateEntity));
 			}else {
 				return ResponseEntity.badRequest().body(null);

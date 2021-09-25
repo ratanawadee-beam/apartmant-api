@@ -30,7 +30,7 @@ public class UserResponse implements Serializable {
 	private String RoleId;
 	private String zipCode;
 	private RoleResponse role;
-	private RentResponse rent;
-	private InvoiceResponse invoice;
+	//private RentResponse rent;
+	//private InvoiceResponse invoice;
 
 }

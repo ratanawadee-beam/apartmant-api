@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.it.Entity.AmphurEntity;
+import com.it.Entity.DistrictEntity;
 import com.it.Entity.InvoiceEntity;
+import com.it.Entity.ProvinceEntity;
 import com.it.Entity.RentEntity;
 import com.it.Entity.RoomEntity;
 import com.it.Entity.UserEntity;
@@ -22,7 +26,10 @@ import com.it.Repository.InvoiceRepository;
 import com.it.Repository.RentRepository;
 import com.it.Repository.RoomRepository;
 import com.it.Repository.UserRepository;
+import com.it.model.AmphurResponse;
+import com.it.model.DistrictResponse;
 import com.it.model.InvoiceResponse;
+import com.it.model.ProvinceResponse;
 import com.it.model.RentResponse;
 import com.it.model.RoomResponse;
 import com.it.model.UserResponse;
@@ -46,29 +53,16 @@ public class InvoiceController {
 	@Autowired 
 	private ModelMapper modelMapper;
 	
-	private InvoiceResponse convertToResponse(InvoiceEntity entity) {
-		InvoiceResponse response = modelMapper.map(entity, InvoiceResponse.class);
-
-		// set rent
-		Optional<RentEntity> rentEntity = rentRepository.findById(Integer.valueOf(entity.getRentId()));
-		if (rentEntity.isPresent()) {
-			response.setRent(modelMapper.map(rentEntity.get(), RentResponse.class));
+	private  InvoiceResponse convertToResponse(InvoiceEntity entity) {
+		InvoiceResponse response = new InvoiceResponse();
+		if (ObjectUtils.isNotEmpty(entity)) {
+			response = modelMapper.map(entity, InvoiceResponse.class);
+			
+			Optional<RentEntity> rentEntity = rentRepository.findById(Integer.valueOf(entity.getRentId()));
+			if (rentEntity.isPresent()) {
+				response.setRent(modelMapper.map(rentEntity.get(), RentResponse.class));
+			}
 		}
-
-		// set user
-		Optional<UserEntity> userEntity = userRepository.findById(String.valueOf(entity.getUserId()));
-		if (userEntity.isPresent()) {
-			response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
-		}
-		//set room	
-		Optional<RoomEntity> roomEntity = roomRepository.findById(String.valueOf(entity.getRoomId()));// ถ้าเป็น
-																										// autokey
-																										// ให้ใส่
-																										// Integer.valueOf
-		if (roomEntity.isPresent()) {
-			response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
-		}
-
 		return response;
 	}
 	
@@ -83,10 +77,10 @@ public class InvoiceController {
 	}
 	
 	@GetMapping("/invoice/{InvoiceId}")
-	public ResponseEntity<InvoiceEntity> getInvoiceByInvoiceId(@PathVariable("InvoiceId") Integer InvoiceId){
+	public ResponseEntity<InvoiceResponse> getInvoiceByInvoiceId(@PathVariable("InvoiceId") Integer InvoiceId){
 		Optional<InvoiceEntity> entity = invoiceRepository.findById(InvoiceId);
 		if (entity.isPresent()) {
-			return ResponseEntity.ok(entity.get());
+			return ResponseEntity.ok(this.convertToResponse(entity.get()));
 		}else {
 			return ResponseEntity.badRequest().body(null);
 		}
@@ -97,14 +91,11 @@ public class InvoiceController {
 	public ResponseEntity<InvoiceEntity> saveInvoice(@RequestBody InvoiceEntity request){
 		if (request != null)  {
 			InvoiceEntity entity = new InvoiceEntity();
-			entity.setInvoiceId(request.getInvoiceId());
-			entity.setInvoiceStetus(request.getInvoiceStetus());
-			entity.setInvoiceNote(request.getInvoiceNote());
-			entity.setInvoiceStart(request.getInvoiceStart());
-			entity.setInvoiceEnd(request.getInvoiceEnd());
+			entity.setInId(request.getInId());
+			entity.setInStetus(request.getInStetus());
+			entity.setInStart(request.getInStart());
+			entity.setInEnd(request.getInEnd());
 			entity.setRentId(request.getRentId());
-			entity.setRoomId(request.getRoomId());
-			entity.setUserId(request.getUserId());
 			
 	return ResponseEntity.ok(invoiceRepository.save(entity));
 
@@ -116,18 +107,15 @@ public class InvoiceController {
 	
 	@PostMapping("/invoice/update")
 	public ResponseEntity<InvoiceEntity> updateinvoice(@RequestBody InvoiceEntity request) {
-		if (request.getInvoiceId() != null) {
-			Optional<InvoiceEntity> entity = invoiceRepository.findById(request.getInvoiceId());
+		if (request.getInId() != null) {
+			Optional<InvoiceEntity> entity = invoiceRepository.findById(request.getInId());
 			if (entity.isPresent()) {
 				//set update data form request
 				InvoiceEntity updateEntity = entity.get();
-				updateEntity.setInvoiceStetus(request.getInvoiceStetus());
-				updateEntity.setInvoiceNote(request.getInvoiceNote());
-				updateEntity.setInvoiceStart(request.getInvoiceStart());
-				updateEntity.setInvoiceEnd(request.getInvoiceEnd());
+				updateEntity.setInStetus(request.getInStetus());
+				updateEntity.setInStart(request.getInStart());
+				updateEntity.setInEnd(request.getInEnd());
 				updateEntity.setRentId(request.getRentId());
-				updateEntity.setRoomId(request.getRoomId());
-				updateEntity.setUserId(request.getUserId());
 				
 				return ResponseEntity.ok(invoiceRepository.save(updateEntity));
 			}else {

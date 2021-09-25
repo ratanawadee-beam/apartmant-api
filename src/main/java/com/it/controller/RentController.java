@@ -45,7 +45,7 @@ public class RentController {
 		RentResponse response = modelMapper.map(entity, RentResponse.class);
 		
 		//set user
-				Optional<UserEntity> userEntity = userRepository.findById(String.valueOf(entity.getUserId()));
+				Optional<UserEntity> userEntity = userRepository.findById(entity.getUserId());
 				if (userEntity.isPresent()) {
 					response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
 				}
