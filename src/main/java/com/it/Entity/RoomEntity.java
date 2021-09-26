@@ -14,7 +14,7 @@ public class RoomEntity {
 	private Integer roomPrice;
 	private String roomLight;
 	private String roomWater;
-	private String roomStatvs;
+	private String roomStatus;
 	public String getRoomId() {
 		return roomId;
 	}
@@ -45,11 +45,12 @@ public class RoomEntity {
 	public void setRoomWater(String roomWater) {
 		this.roomWater = roomWater;
 	}
-	public String getRoomStatvs() {
-		return roomStatvs;
+	public String getRoomStatus() {
+		return roomStatus;
 	}
-	public void setRoomStatvs(String roomStatvs) {
-		this.roomStatvs = roomStatvs;
+	public void setRoomStatus(String roomStatus) {
+		this.roomStatus = roomStatus;
 	}
+
 	
 }

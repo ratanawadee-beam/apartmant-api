@@ -86,7 +86,6 @@ public class RentController {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
-	//test
 	
 	@PostMapping("/rent/save")
 	public ResponseEntity<RentEntity> saveRent(@RequestBody RentEntity request){
@@ -102,6 +101,12 @@ public class RentController {
 			entity.setRentWa(request.getRentWa());
 			entity.setUserId(request.getUserId());
 			entity.setRoomId(request.getRoomId());
+			
+			Optional<RoomEntity> room =roomRepository.findById(request.getRoomId());
+			if(room.isPresent()) {
+				room.get().setRoomStatus("2");
+				roomRepository.save(room.get());
+			}
 			
 		return ResponseEntity.ok(rentRepository.save(entity));
 		}else {
