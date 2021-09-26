@@ -86,6 +86,7 @@ public class RentController {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
+	//test
 	
 	@PostMapping("/rent/save")
 	public ResponseEntity<RentEntity> saveRent(@RequestBody RentEntity request){
