@@ -1,5 +1,12 @@
 package com.it.Controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,6 +32,7 @@ import com.it.model.RentResponse;
 import com.it.model.RoomResponse;
 import com.it.model.UserResponse;
 import com.it.service.ReportService;
+import com.it.utils.SendEmailUtils;
 @RestController
 
 public class RentController {
@@ -42,7 +50,11 @@ public class RentController {
 	private ModelMapper modelMapper;
 	
 	@Autowired 
-	private ReportService  ReportService;
+	private ReportService  reportService;
+	
+	@Autowired
+	private SendEmailUtils sendEmailUtils;
+	
 	
 	public RentResponse  convertToResponse(RentEntity entity) {
 		RentResponse response = modelMapper.map(entity, RentResponse.class);
@@ -112,7 +124,7 @@ public class RentController {
 				room.get().setRoomStatus("2");
 				roomRepository.save(room.get());
 			}
-			
+			sendMail(request.getRentId());
 		return ResponseEntity.ok(rentRepository.save(entity));
 		}else {
 			return ResponseEntity.badRequest().body(null);
@@ -146,5 +158,36 @@ public class RentController {
 	public ResponseEntity<String> deleteRentByRentId(@PathVariable("rentId") String rentId) {
 		rentRepository.deleteById(Integer.valueOf(rentId));
 		return ResponseEntity.ok("SUCCESS");
+	}
+	
+	@PostMapping("/sendMail/{rentId}")
+	private void sendMail(Integer rentId) {
+		Optional<RentEntity> entity = rentRepository.findById(rentId);
+		try {
+			ByteArrayOutputStream out = reportService.generateBilldrugReport(rentId);			
+			Path tempFile = Files.createTempFile( "Report",".pdf");
+			out.toByteArray();
+			if(Files.exists(tempFile)) {
+				Files.delete(tempFile);
+				
+				Files.write(tempFile, out.toByteArray());
+			}else {
+				Files.write(tempFile, out.toByteArray());
+			}
+
+			Optional<UserEntity> opUser = userRepository.findById(entity.get().getUserId());
+			UserEntity user = opUser.get();
+			String subject = "";
+			
+			StringBuilder text = new StringBuilder();
+			text.append("UserName : " + user.getUserName());
+			text.append("PassWord : " + user.getUserPhone());
+			sendEmailUtils.sendMail(user.getUserEmail(), subject, text.toString(), tempFile.toFile());
+			Files.delete(tempFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
