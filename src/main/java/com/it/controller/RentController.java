@@ -24,7 +24,7 @@ import com.it.Repository.UserRepository;
 import com.it.model.RentResponse;
 import com.it.model.RoomResponse;
 import com.it.model.UserResponse;
-
+import com.it.service.ReportService;
 @RestController
 
 public class RentController {
@@ -37,11 +37,14 @@ public class RentController {
 	
 	@Autowired
 	private RoomRepository roomRepository;
-	
+
 	@Autowired 
 	private ModelMapper modelMapper;
 	
-	private RentResponse  convertToResponse(RentEntity entity) {
+	@Autowired 
+	private ReportService  ReportService;
+	
+	public RentResponse  convertToResponse(RentEntity entity) {
 		RentResponse response = modelMapper.map(entity, RentResponse.class);
 		
 		//set user
@@ -79,8 +82,10 @@ public class RentController {
 	
 	@GetMapping("/rent/by-userId{userId}")
 	public ResponseEntity<List<RentResponse>> getRentByuserId(@PathVariable("userId") String userId){
-		List<RentEntity> entity = rentRepository.findByUserId(userId);
-		if (null != entity && entity.size() > 0) {
+//		Optional<RentEntity> entity = rentRepository.findByUserId(userId);
+//		if (null != entity && entity.size() > 0) {
+			Optional<RentEntity> entity = rentRepository.findByUserId(userId);
+			if (entity.isPresent()) {
 			return ResponseEntity.ok(entity.stream().map(this::convertToResponse).collect(Collectors.toList()));
 		}else {
 			return ResponseEntity.badRequest().body(null);

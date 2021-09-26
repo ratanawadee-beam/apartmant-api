@@ -11,5 +11,5 @@ import com.it.Entity.RentEntity;
 public interface RentRepository extends JpaRepository<RentEntity, Integer>{
 	
 	@Query(value = "SELECT * FROM tb_rent WHERE user_id =?1 " , nativeQuery = true)
-	 List<RentEntity> findByUserId(String userId);
+	Optional<RentEntity> findByUserId(String userId);
 }
