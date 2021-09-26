@@ -77,6 +77,16 @@ public class RentController {
 		}
 	}
 	
+	@GetMapping("/rent/by-userId{userId}")
+	public ResponseEntity<List<RentResponse>> getRentByuserId(@PathVariable("userId") String userId){
+		List<RentEntity> entity = rentRepository.findByUserId(userId);
+		if (null != entity && entity.size() > 0) {
+			return ResponseEntity.ok(entity.stream().map(this::convertToResponse).collect(Collectors.toList()));
+		}else {
+			return ResponseEntity.badRequest().body(null);
+		}
+	}
+	
 	@PostMapping("/rent/save")
 	public ResponseEntity<RentEntity> saveRent(@RequestBody RentEntity request){
 		if (request != null) {
