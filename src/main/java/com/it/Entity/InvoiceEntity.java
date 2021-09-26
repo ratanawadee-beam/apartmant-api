@@ -16,7 +16,9 @@ public class InvoiceEntity {
 	private String InStetus;
 	private String InStart;
 	private String InEnd;
-	private String rentId;
+	private Integer rentId;
+	private String roomId;
+	private String userId;
 	public Integer getInId() {
 		return InId;
 	}
@@ -41,11 +43,24 @@ public class InvoiceEntity {
 	public void setInEnd(String inEnd) {
 		InEnd = inEnd;
 	}
-	public String getRentId() {
+	public Integer getRentId() {
 		return rentId;
 	}
-	public void setRentId(String rentId) {
+	public void setRentId(Integer rentId) {
 		this.rentId = rentId;
 	}
+	public String getRoomId() {
+		return roomId;
+	}
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	
 }

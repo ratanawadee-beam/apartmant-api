@@ -1,4 +1,4 @@
-package com.it.Controller;
+  package com.it.Controller;
 
 import java.util.Date;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,21 +30,28 @@ public class PaymentController {
 	@Autowired
 	private PaymentRepository paymentRepository;
 	
-	@Autowired InvoiceRepository invoiceRepository;
+	@Autowired 
+	private InvoiceRepository invoiceRepository;
+	
+
 	
 	@Autowired
     private ModelMapper modelMapper;
 	
-	private PaymentResponse convertToResponse(PaymentEntity entity) {
-		PaymentResponse response = modelMapper.map(entity, PaymentResponse.class);
-		
+	private  PaymentResponse convertToResponse(PaymentEntity entity) {
+		PaymentResponse response = new PaymentResponse();
+		if (ObjectUtils.isNotEmpty(entity)) {
+			response = modelMapper.map(entity, PaymentResponse.class);
+			
 		//set invoice
 				Optional<InvoiceEntity> invoiceEntity = invoiceRepository.findById(Integer.valueOf(entity.getInId()));
 				if (invoiceEntity.isPresent()) {
-					response.setInvoice(modelMapper.map(invoiceEntity.get(), InvoiceResponse.class));
+					response.setInvoice(modelMapper.map(invoiceEntity.get(), InvoiceResponse.class));	
+				}
 				}
 				return response;
 	      }
+	
 	
 	@GetMapping("/payments")
 	public ResponseEntity<List<PaymentResponse>> getAllPayment(){
@@ -56,10 +64,10 @@ public class PaymentController {
 	}
 	
 	@GetMapping("/payment/{payId}")
-	public ResponseEntity<PaymentEntity> getPaymentBypayId(@PathVariable("payId") Integer payId){
+	public ResponseEntity<PaymentResponse> getPaymentBypayId(@PathVariable("payId") Integer payId){
 		Optional<PaymentEntity> entity = paymentRepository.findById(payId);
 		if (entity.isPresent()) {
-			return ResponseEntity.ok(entity.get());
+			return ResponseEntity.ok(this.convertToResponse(entity.get()));
 		}else {
 			return ResponseEntity.badRequest().body(null);
 		}

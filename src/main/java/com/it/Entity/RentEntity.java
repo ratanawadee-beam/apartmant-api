@@ -19,6 +19,7 @@ public class RentEntity {
 	private String rentWa;
 	private String userId;
 	private String roomId;
+	
 	public Integer getRentId() {
 		return rentId;
 	}

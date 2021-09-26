@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.it.Entity.AmphurEntity;
 import com.it.Entity.DistrictEntity;
 import com.it.Entity.InvoiceEntity;
+import com.it.Entity.PaymentEntity;
 import com.it.Entity.ProvinceEntity;
 import com.it.Entity.RentEntity;
 import com.it.Entity.RoomEntity;
@@ -29,6 +30,7 @@ import com.it.Repository.UserRepository;
 import com.it.model.AmphurResponse;
 import com.it.model.DistrictResponse;
 import com.it.model.InvoiceResponse;
+import com.it.model.PaymentResponse;
 import com.it.model.ProvinceResponse;
 import com.it.model.RentResponse;
 import com.it.model.RoomResponse;
@@ -53,16 +55,47 @@ public class InvoiceController {
 	@Autowired 
 	private ModelMapper modelMapper;
 	
-	private  InvoiceResponse convertToResponse(InvoiceEntity entity) {
-		InvoiceResponse response = new InvoiceResponse();
-		if (ObjectUtils.isNotEmpty(entity)) {
-			response = modelMapper.map(entity, InvoiceResponse.class);
-			
-			Optional<RentEntity> rentEntity = rentRepository.findById(Integer.valueOf(entity.getRentId()));
-			if (rentEntity.isPresent()) {
-				response.setRent(modelMapper.map(rentEntity.get(), RentResponse.class));
+//	private  InvoiceResponse convertToResponse(InvoiceEntity entity) {
+//		InvoiceResponse response = new InvoiceResponse();
+//		if (ObjectUtils.isNotEmpty(entity)) {
+//			response = modelMapper.map(entity, InvoiceResponse.class);
+//			
+//			Optional<RentEntity> rentEntity = rentRepository.findById(Integer.valueOf(entity.getRentId()));
+//			if (rentEntity.isPresent()) {
+//				response.setRent(modelMapper.map(rentEntity.get(), RentResponse.class));
+//					
+//					Optional<UserEntity> userEntity = userRepository.findById(String.valueOf(entity.getUserId()));
+//					if (userEntity.isPresent()) {
+//						response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
+//						
+//						Optional<RoomEntity> roomEntity = roomRepository.findById(String.valueOf(entity.getRoomId()));
+//						if (roomEntity.isPresent()) {
+//							response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
+//					}
+//				}
+//			}
+//		}
+//		return response;
+//	}
+
+	private InvoiceResponse convertToResponse(InvoiceEntity entity) {
+		InvoiceResponse response = modelMapper.map(entity, InvoiceResponse.class);
+
+		Optional<RentEntity> rentEntity = rentRepository.findById(entity.getRentId());
+		if (rentEntity.isPresent()) {
+			RentResponse rentResponse = modelMapper.map(rentEntity.get(), RentResponse.class);
+
+			Optional<UserEntity> userEntity = userRepository.findById(String.valueOf(entity.getUserId()));
+			if (userEntity.isPresent()) {
+				response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
+
+				Optional<RoomEntity> roomEntity = roomRepository.findById(String.valueOf(entity.getRoomId()));
+				if (roomEntity.isPresent()) {
+					response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
+				}
 			}
 		}
+
 		return response;
 	}
 	

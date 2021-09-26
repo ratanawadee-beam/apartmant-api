@@ -21,4 +21,5 @@ public class PaymentResponse implements Serializable {
 	private String payTotal;
 	private Integer InId;
 	private InvoiceResponse invoice;
+	
 }

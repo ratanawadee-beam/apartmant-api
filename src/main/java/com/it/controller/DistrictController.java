@@ -44,8 +44,10 @@ public class DistrictController {
 
 	private DistrictResponse converToResponse(DistrictEntity entity) {
 		DistrictResponse response = new DistrictResponse();
+		
 		if (ObjectUtils.isNotEmpty(entity)) {
 			response = modelMapper.map(entity, DistrictResponse.class);
+			
 			Optional<AmphurEntity> amphurEntity = amphurRepository.findById(entity.getAmphurId());
 			if (amphurEntity.isPresent()) {
 				response.setAmphur(modelMapper.map(amphurEntity.get(), AmphurResponse.class));
