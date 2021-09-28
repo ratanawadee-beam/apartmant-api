@@ -53,10 +53,11 @@ public class SendEmailService {
 
 			Optional<UserEntity> opUser = userRepository.findById(entity.get().getUserId());
 			UserEntity user = opUser.get();
-			String subject = "";
+			String subject = "หนังสือสัญญาอพาร์ตเมนต์";
 			
 			StringBuilder text = new StringBuilder();
-			text.append("UserName : " + user.getUserName());
+			text.append("UserName : " + user.getUserUsername());
+			
 			text.append("PassWord : " + user.getUserPhone());
 			sendEmailUtils.sendMail(user.getUserEmail(), subject, text.toString(), tempFile.toFile());
 			Files.delete(tempFile);
@@ -67,11 +68,11 @@ public class SendEmailService {
 		
 	}
 	
-	public void sendEmailPayment(List<Integer> inIds) {
-		for(Integer inId : inIds) {
+	public void sendEmailPayment(List<Integer> InIds) {
+		for(Integer InId : InIds) {
 			try {
-				ByteArrayOutputStream out = reportService.generateBillPaymentReport(inId);
-				Path tempFile = Files.createTempFile( "Bill",".pdf");
+				ByteArrayOutputStream out = reportService.generateBillPaymentReport(InId);
+				Path tempFile = Files.createTempFile( "Report",".pdf");
 				out.toByteArray();
 				if(Files.exists(tempFile)) {
 					Files.delete(tempFile);
@@ -81,7 +82,7 @@ public class SendEmailService {
 					Files.write(tempFile, out.toByteArray());
 				}
 
-				Optional<InvoiceEntity> invoiceOptional = invoiceRepository.findById(inId);
+				Optional<InvoiceEntity> invoiceOptional = invoiceRepository.findById(InId);
 				InvoiceEntity invoice = invoiceOptional.get();
 				
 				Optional<UserEntity> opUser = userRepository.findById(invoice.getUserId());

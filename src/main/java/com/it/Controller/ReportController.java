@@ -62,5 +62,22 @@ public class ReportController {
 		return response;
 	}
 
+	@GetMapping(path = "/generateBilldPaymentReport")
+	public ResponseEntity<InputStreamResource> generateBilldPaymentReport(@RequestParam(name = "InId", required = true) Integer InId) throws IOException{
+		log.info("generateReport : Start :: inId : " + InId);
+		ResponseEntity<InputStreamResource> response = null;
+		try (ByteArrayOutputStream out = reportService.generateBillPaymentReport(InId)){
+			if(out != null) {
+				response = new  ResponseEntity<>(new InputStreamResource(new ByteArrayInputStream(out.toByteArray())),
+						ReportUtils.createResponseHeader(MediaType.APPLICATION_PDF, "Bill.pdf", null),
+						HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			log.error("generateReport Error : {}" , e);
+		}
+		log.info("generateReport : End");
+		return response;
+	}
+
 
 }

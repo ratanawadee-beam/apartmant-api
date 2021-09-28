@@ -68,7 +68,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="424" splitType="Stretch">
+		<band height="583" splitType="Stretch">
 			<rectangle>
 				<reportElement x="-10" y="3" width="570" height="83" uuid="f26a61b9-28b7-44f0-83a3-f50fb2e25892"/>
 			</rectangle>
@@ -277,7 +277,7 @@
 				<textFieldExpression><![CDATA[$P{totalWa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="488" y="377" width="48" height="30" uuid="cfb9107c-98d4-46dc-a703-611fc090dba2"/>
+				<reportElement x="488" y="377" width="51" height="30" uuid="cfb9107c-98d4-46dc-a703-611fc090dba2"/>
 				<textElement textAlignment="Right">
 					<font fontName="TH SarabunPSK" size="18"/>
 				</textElement>
@@ -290,27 +290,22 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{userName}+"  "+$P{userLasname}]]></textFieldExpression>
 			</textField>
-		</band>
-	</columnHeader>
-	<summary>
-		<band height="159" splitType="Stretch">
-			<rectangle>
-				<reportElement x="-10" y="-12" width="570" height="141" uuid="d6f6ae52-6527-4009-90f0-861f4d5c8dbb"/>
-			</rectangle>
 			<staticText>
-				<reportElement x="34" y="30" width="100" height="30" uuid="00f7c43a-38a7-4537-960c-f4f9e35bbf5d"/>
+				<reportElement x="377" y="419" width="100" height="30" uuid="00f7c43a-38a7-4537-960c-f4f9e35bbf5d"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="20" isBold="true"/>
 				</textElement>
 				<text><![CDATA[QR Promptpay]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="34" y="64" width="141" height="30" uuid="6f95f036-a808-4150-bbe4-8d811117c593"/>
-				<textElement>
-					<font fontName="TH SarabunPSK" size="16"/>
+				<reportElement stretchType="ContainerHeight" x="15" y="495" width="209" height="76" uuid="7e009002-af39-4dbc-81cb-067fb29f32b4"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="18"/>
 				</textElement>
-				<text><![CDATA[ชื่อบัญชี : นางสาว รัตนาวดี ศรีคำ]]></text>
+				<text><![CDATA[ผู้รับเงิน 
+( นางสาวรันตาวดี ศรีคำ )
+เจ้าของอพาร์ตเมนต์คุณอนันต์มหาสารคาม]]></text>
 			</staticText>
 		</band>
-	</summary>
+	</columnHeader>
 </jasperReport>
