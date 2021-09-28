@@ -1,9 +1,5 @@
 package com.it.Controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,51 +24,49 @@ import com.it.Repository.UserRepository;
 import com.it.model.RentResponse;
 import com.it.model.RoomResponse;
 import com.it.model.UserResponse;
-import com.it.service.ReportService;
-import com.it.utils.SendEmailUtils;
+import com.it.service.SendEmailService;
+
 @RestController
 
 public class RentController {
 
 	@Autowired
 	private RentRepository rentRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private RoomRepository roomRepository;
 
-	@Autowired 
-	private ModelMapper modelMapper;
-	
-	@Autowired 
-	private ReportService  reportService;
-	
 	@Autowired
-	private SendEmailUtils sendEmailUtils;
-	
-	
-	public RentResponse  convertToResponse(RentEntity entity) {
+	private ModelMapper modelMapper;
+
+	@Autowired
+	private SendEmailService sendEmailService;
+
+	public RentResponse convertToResponse(RentEntity entity) {
 		RentResponse response = modelMapper.map(entity, RentResponse.class);
-		
-		//set user
-				Optional<UserEntity> userEntity = userRepository.findById(entity.getUserId());
-				if (userEntity.isPresent()) {
-					response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
-					
-				
-		//set room	
-				Optional<RoomEntity> roomEntity = roomRepository.findById(String.valueOf(entity.getRoomId()));//ถ้าเป็น autokey ให้ใส่ Integer.valueOf
-				if (roomEntity.isPresent()) {
-					response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
-				}
-				}
-				return response;
+
+		// set user
+		Optional<UserEntity> userEntity = userRepository.findById(entity.getUserId());
+		if (userEntity.isPresent()) {
+			response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
+
+			// set room
+			Optional<RoomEntity> roomEntity = roomRepository.findById(String.valueOf(entity.getRoomId()));// ถ้าเป็น
+																											// autokey
+																											// ให้ใส่
+																											// Integer.valueOf
+			if (roomEntity.isPresent()) {
+				response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
 			}
-	
+		}
+		return response;
+	}
+
 	@GetMapping("/rent")
-	public ResponseEntity<List<RentResponse>> getAllRent(){
+	public ResponseEntity<List<RentResponse>> getAllRent() {
 		List<RentEntity> entities = rentRepository.findAll();
 		if (CollectionUtils.isNotEmpty(entities)) {
 			return ResponseEntity.ok(entities.stream().map(this::convertToResponse).collect(Collectors.toList()));
@@ -80,31 +74,31 @@ public class RentController {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
-	
+
 	@GetMapping("/rent/{rentId}")
-	public ResponseEntity<List<RentResponse>> getRentByrentId(@PathVariable("rentId") Integer rentId){
+	public ResponseEntity<List<RentResponse>> getRentByrentId(@PathVariable("rentId") Integer rentId) {
 		Optional<RentEntity> entity = rentRepository.findById(rentId);
 		if (entity.isPresent()) {
 			return ResponseEntity.ok(entity.stream().map(this::convertToResponse).collect(Collectors.toList()));
-		}else {
+		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
-	
+
 	@GetMapping("/rent/by-userId{userId}")
-	public ResponseEntity<List<RentResponse>> getRentByuserId(@PathVariable("userId") String userId){
+	public ResponseEntity<List<RentResponse>> getRentByuserId(@PathVariable("userId") String userId) {
 //		Optional<RentEntity> entity = rentRepository.findByUserId(userId);
 //		if (null != entity && entity.size() > 0) {
-			Optional<RentEntity> entity = rentRepository.findByUserId(userId);
-			if (entity.isPresent()) {
+		Optional<RentEntity> entity = rentRepository.findByUserId(userId);
+		if (entity.isPresent()) {
 			return ResponseEntity.ok(entity.stream().map(this::convertToResponse).collect(Collectors.toList()));
-		}else {
+		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
-	
+
 	@PostMapping("/rent/save")
-	public ResponseEntity<RentEntity> saveRent(@RequestBody RentEntity request){
+	public ResponseEntity<RentEntity> saveRent(@RequestBody RentEntity request) {
 		if (request != null) {
 			RentEntity entity = new RentEntity();
 			entity.setRentId(request.getRentId());
@@ -117,23 +111,25 @@ public class RentController {
 			entity.setRentWa(request.getRentWa());
 			entity.setUserId(request.getUserId());
 			entity.setRoomId(request.getRoomId());
-			
-			Optional<RoomEntity> room =roomRepository.findById(request.getRoomId());
-			if(room.isPresent()) {
+
+			Optional<RoomEntity> room = roomRepository.findById(request.getRoomId());
+			if (room.isPresent()) {
 				room.get().setRoomStatus("2");
 				roomRepository.save(room.get());
 			}
-//			sendMail(request.getRentId());
-		return ResponseEntity.ok(rentRepository.save(entity));
-		
+			rentRepository.save(entity);
+
+			// SendEmailRegister
+			sendEmailService.sendEmailRegister(entity.getRentId());
+
+			return ResponseEntity.ok(entity);
 		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
-		}
-	
-	
+	}
+
 	@PostMapping("/rent/update")
-	public ResponseEntity<RentEntity> updateRent(@RequestBody RentEntity request){
+	public ResponseEntity<RentEntity> updateRent(@RequestBody RentEntity request) {
 		if (request.getRentId() != null) {
 			Optional<RentEntity> entity = rentRepository.findById(request.getRentId());
 			if (entity.isPresent()) {
@@ -148,47 +144,18 @@ public class RentController {
 				updateEntity.setUserId(request.getUserId());
 				updateEntity.setRoomId(request.getRoomId());
 				return ResponseEntity.ok(rentRepository.save(updateEntity));
-			}else {
+			} else {
 				return ResponseEntity.badRequest().body(null);
 			}
-		}else {
+		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
+
 	@DeleteMapping("/rent/{rentId}")
 	public ResponseEntity<String> deleteRentByRentId(@PathVariable("rentId") String rentId) {
 		rentRepository.deleteById(Integer.valueOf(rentId));
 		return ResponseEntity.ok("SUCCESS");
 	}
-	
-	@PostMapping("/sendMail/{rentId}")
-	private void sendMail(Integer rentId) {
-		Optional<RentEntity> entity = rentRepository.findById(rentId);
-		try {
-			ByteArrayOutputStream out = reportService.generateBilldrugReport(rentId);			
-			Path tempFile = Files.createTempFile( "Report",".pdf");
-			out.toByteArray();
-			if(Files.exists(tempFile)) {
-				Files.delete(tempFile);
-				
-				Files.write(tempFile, out.toByteArray());
-			}else {
-				Files.write(tempFile, out.toByteArray());
-			}
 
-			Optional<UserEntity> opUser = userRepository.findById(entity.get().getUserId());
-			UserEntity user = opUser.get();
-			String subject = "";
-			
-			StringBuilder text = new StringBuilder();
-			text.append("UserName : " + user.getUserUsername());
-			text.append("PassWord : " + user.getUserPhone());
-			sendEmailUtils.sendMail(user.getUserEmail(), subject, text.toString(), tempFile.toFile());
-			Files.delete(tempFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 }
