@@ -17,8 +17,13 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.it.Controller.RentController;
+import com.it.Entity.InvoiceEntity;
+import com.it.Entity.InvoicedetailEntity;
 import com.it.Entity.RentEntity;
+import com.it.Repository.InvoiceRepository;
+import com.it.Repository.InvoicedetailRepository;
 import com.it.Repository.RentRepository;
+import com.it.model.InvoiceResponse;
 import com.it.model.RentResponse;
 
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -28,18 +33,24 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 @Service
-public class ReportService{
+public class ReportService {
 
 	private static final Logger log = LoggerFactory.getLogger(ReportService.class);
-	
+
 	@Autowired
-    private ModelMapper modelMapper;
-	
+	private ModelMapper modelMapper;
+
 	@Autowired
 	private RentRepository rentRepository;
-	
+
 	@Autowired
 	private RentController rentController;
+
+	@Autowired
+	private InvoiceRepository invoiceRepository;
+	
+	@Autowired
+	private InvoicedetailRepository invoicedetailRepository;
 
 	public ByteArrayOutputStream generateReport() throws IOException {
 		log.info("generateReport : Start");
@@ -67,14 +78,14 @@ public class ReportService{
 		log.info("generateBilldrugReport : Start :: rentId : " + rentId);
 		ByteArrayOutputStream out = null;
 		try {
-			
+
 			Optional<RentEntity> entity = rentRepository.findById(rentId);
 			if (entity.isPresent()) {
 				RentResponse rent = rentController.convertToResponse(entity.get());
 				ClassPathResource reportFile = new ClassPathResource("report/Report.jasper");
 				JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportFile.getInputStream());
 
-				//parameter
+				// parameter
 				Map<String, Object> parameters = new HashMap<>();
 				parameters.put("userTitle", rent.getUser().getUserTitle());
 				parameters.put("userName", rent.getUser().getUserName());
@@ -94,9 +105,10 @@ public class ReportService{
 				parameters.put("rentLi", rent.getRentLi());
 				parameters.put("rentWa", rent.getRentWa());
 				parameters.put("rentTotalprice", rent.getRentTotalprice());
-				//list bean
-			//	JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource();
-				
+				// list bean
+				// JRBeanCollectionDataSource beanColDataSource = new
+				// JRBeanCollectionDataSource();
+
 				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
 				out = new ByteArrayOutputStream();
 
@@ -113,27 +125,61 @@ public class ReportService{
 //		}
 		return out;
 	}
-	
-	
-//	private BilldrugResponse convertToResponse(BilldrugEntity entity) {
-//		BilldrugResponse response = modelMapper.map(entity, BilldrugResponse.class);
-//		
-//		//set Treatment
-//		Optional<TreatmentEntity> treatEntity = treatmentRepository.findById(entity.getTmId());
-//		if (treatEntity.isPresent()) {
-//			TreatmentResponse treatmentResponse = modelMapper.map(treatEntity.get(), TreatmentResponse.class);
-//			Optional<UserEntity> userEntity = userRepository.findById(Integer.parseInt(treatEntity.get().getUserId()));
-//			if (userEntity.isPresent()) {
-//				treatmentResponse.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
-//			}
-//			response.setTreatment(treatmentResponse);
+
+	public ByteArrayOutputStream generateBillPaymentReport(Integer inId) throws IOException {
+		log.info("generateBillPaymentReport : Start :: inId : " + inId);
+		ByteArrayOutputStream out = null;
+		try {
+			Optional<InvoiceEntity> invoiceOptional = invoiceRepository.findById(inId);
+			InvoiceEntity invoice = invoiceOptional.get();
+			
+			Optional<InvoicedetailEntity> invoiceDetailOptional = invoicedetailRepository.findByInId(inId);
+			InvoicedetailEntity invoiceDetail = invoiceDetailOptional.get();
+			
+			Optional<RentEntity> entity = rentRepository.findById(invoice.getRentId());
+			if (entity.isPresent()) {
+				RentResponse rent = rentController.convertToResponse(entity.get());
+
+				ClassPathResource reportFile = new ClassPathResource("report/bill.jasper");
+				JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportFile.getInputStream());
+
+				// parameter
+				Map<String, Object> parameters = new HashMap<>();
+				parameters.put("roomId", rent.getRoom().getRoomId());
+				parameters.put("roomTypeName", rent.getRoom().getRoomTypename());
+				parameters.put("userName", rent.getUser().getUserName());
+				parameters.put("userLasname", rent.getUser().getUserLasname());
+				parameters.put("inStart", invoice.getInStart());
+				parameters.put("inEnd", invoice.getInEnd());
+				parameters.put("inId", invoice.getInId());
+				parameters.put("roomLight", rent.getRoom().getRoomLight());
+				parameters.put("deLinew", invoiceDetail.getDeLinew());
+				parameters.put("totalunitLi", invoiceDetail.getTotalunitLi());
+				parameters.put("rentLi", rent.getRentLi());
+				parameters.put("roomPrice", rent.getRoom().getRoomPrice().toString());
+				parameters.put("totalLi", invoiceDetail.getTotalLi());
+				parameters.put("totalWa", invoiceDetail.getTotalWa());
+				parameters.put("deTotal", invoiceDetail.getDeTotal());
+
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
+				out = new ByteArrayOutputStream();
+
+				JasperExportManager.exportReportToPdfStream(jasperPrint, out);
+			}
+
+		} catch (Exception e) {
+			log.error("generateBilldrugReport Error : {} ", e);
+		}
+		log.info("generateBilldrugReport : End");
+
+//		try(OutputStream outputStream = new FileOutputStream("D:\\File-report\\test.pdf")) {
+//		    out.writeTo(outputStream);
 //		}
-//		
-//		return response;
-//	}
-	
+		return out;
+	}
+
 	private Integer getInt(String str) {
-		if(StringUtils.isNoneBlank(str)) {
+		if (StringUtils.isNoneBlank(str)) {
 			return new Integer(str);
 		}
 		return 0;

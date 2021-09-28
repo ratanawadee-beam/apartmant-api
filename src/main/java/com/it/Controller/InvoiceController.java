@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.it.Entity.InvoiceEntity;
 
 import com.it.Entity.RentEntity;
@@ -37,19 +36,19 @@ public class InvoiceController {
 
 	@Autowired
 	private InvoiceRepository invoiceRepository;
-	
+
 	@Autowired
 	private RentRepository rentRepository;
-	
+
 	@Autowired
 	private RoomRepository roomRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Autowired 
+
+	@Autowired
 	private ModelMapper modelMapper;
-	
+
 //	private  InvoiceResponse convertToResponse(InvoiceEntity entity) {
 //		InvoiceResponse response = new InvoiceResponse();
 //		if (ObjectUtils.isNotEmpty(entity)) {
@@ -93,9 +92,9 @@ public class InvoiceController {
 
 		return response;
 	}
-	
+
 	@GetMapping("/invoice")
-	public ResponseEntity<List<InvoiceResponse>> getAllInvoice(){
+	public ResponseEntity<List<InvoiceResponse>> getAllInvoice() {
 		List<InvoiceEntity> entities = invoiceRepository.findAll();
 		if (CollectionUtils.isNotEmpty(entities)) {
 			return ResponseEntity.ok(entities.stream().map(this::convertToResponse).collect(Collectors.toList()));
@@ -103,76 +102,70 @@ public class InvoiceController {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
-	
+
 	@GetMapping("/invoice/{InvoiceId}")
-	public ResponseEntity<InvoiceResponse> getInvoiceByInvoiceId(@PathVariable("InvoiceId") Integer InvoiceId){
+	public ResponseEntity<InvoiceResponse> getInvoiceByInvoiceId(@PathVariable("InvoiceId") Integer InvoiceId) {
 		Optional<InvoiceEntity> entity = invoiceRepository.findById(InvoiceId);
 		if (entity.isPresent()) {
 			return ResponseEntity.ok(this.convertToResponse(entity.get()));
-		}else {
+		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
-			
+
 	}
-	
+
 	@PostMapping("/invoice/save")
-	public ResponseEntity<InvoiceEntity> saveInvoice(@RequestBody InvoiceEntity request){
-		if (request != null)  {
+	public ResponseEntity<InvoiceEntity> saveInvoice(@RequestBody InvoiceEntity request) {
+		if (request != null) {
 			InvoiceEntity entity = new InvoiceEntity();
-			entity.setInId(request.getInId());
-			entity.setInStetus(request.getInStetus());
+			entity.setInStatus(request.getInStatus());
 			entity.setInStart(request.getInStart());
 			entity.setInEnd(request.getInEnd());
 			entity.setRoomId(request.getRoomId());
 			entity.setUserId(request.getUserId());
 			entity.setRentId(request.getRentId());
-			
-	return ResponseEntity.ok(invoiceRepository.save(entity));
+
+			return ResponseEntity.ok(invoiceRepository.save(entity));
 
 		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
-		
+
 	}
-	
+
 	@PostMapping("/invoice/update")
 	public ResponseEntity<InvoiceEntity> updateinvoice(@RequestBody InvoiceEntity request) {
 		if (request.getInId() != null) {
 			Optional<InvoiceEntity> entity = invoiceRepository.findById(request.getInId());
 			if (entity.isPresent()) {
-				//set update data form request
+				// set update data form request
 				InvoiceEntity updateEntity = entity.get();
-				updateEntity.setInStetus(request.getInStetus());
+				updateEntity.setInStatus(request.getInStatus());
 				updateEntity.setInStart(request.getInStart());
 				updateEntity.setInEnd(request.getInEnd());
 				updateEntity.setRentId(request.getRentId());
-				
+
 				return ResponseEntity.ok(invoiceRepository.save(updateEntity));
-			}else {
+			} else {
 				return ResponseEntity.badRequest().body(null);
 			}
-			
-			}else {
-				return ResponseEntity.badRequest().body(null);
-			}
-			
+
+		} else {
+			return ResponseEntity.badRequest().body(null);
 		}
-	
+
+	}
+
 	@GetMapping("/invoice/by-userId{userId}")
-	public ResponseEntity<List<InvoiceResponse>> invoiceByuserId(@PathVariable("userId") String userId){
+	public ResponseEntity<List<InvoiceResponse>> invoiceByuserId(@PathVariable("userId") String userId) {
 //		Optional<RentEntity> entity = rentRepository.findByUserId(userId);
 //		if (null != entity && entity.size() > 0) {
-			Optional<InvoiceEntity> entity = invoiceRepository.findByUserId(userId);
-			if (entity.isPresent()) {
+		List<InvoiceEntity> entity = invoiceRepository.findByUserId(userId);
+		if (null != entity) {
 			return ResponseEntity.ok(entity.stream().map(this::convertToResponse).collect(Collectors.toList()));
-		}else {
+		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
-	
 
-	
-	
-	
-	}//
-
+}//

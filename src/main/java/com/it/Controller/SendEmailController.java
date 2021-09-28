@@ -1,5 +1,7 @@
 package com.it.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,12 @@ public class SendEmailController {
 	@GetMapping("/send-email/register")
 	public ResponseEntity<String> sendEmailRegiser(@RequestParam(required = true) Integer rentId) {
 		sendEmailService.sendEmailRegister(rentId);
+		return ResponseEntity.ok("SUCCESS");
+	}
+	
+	@GetMapping("/send-email/payment")
+	public ResponseEntity<String> sendEmailPayment(@RequestParam(required = true) List<Integer> inIds) {
+		sendEmailService.sendEmailPayment(inIds);
 		return ResponseEntity.ok("SUCCESS");
 	}
 

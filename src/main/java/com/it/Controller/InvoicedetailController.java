@@ -33,7 +33,7 @@ public class InvoicedetailController {
 	private InvoicedetailRepository invoicedetailRepository;
 	
 	@Autowired
-	private RentRepository rentRepository;
+	private InvoiceRepository invoiceRepository;
 	
 	@Autowired 
 	private ModelMapper modelMapper;
@@ -42,9 +42,9 @@ public class InvoicedetailController {
 		InvoicedetailResponse response = modelMapper.map(entity, InvoicedetailResponse.class);
 		
 		//set invoice
-		Optional<RentEntity> rentEntity = rentRepository.findById(entity.getRentId());
-		if (rentEntity.isPresent()) {
-			RentResponse rentResponse = modelMapper.map(rentEntity.get(), RentResponse.class);
+		Optional<InvoiceEntity> invoiceEntity = invoiceRepository.findById(entity.getInId());
+		if (invoiceEntity.isPresent()) {
+			InvoiceResponse invoiceResponse = modelMapper.map(invoiceEntity.get(), InvoiceResponse.class);
 		}
 		return response;
   }
@@ -73,7 +73,6 @@ public class InvoicedetailController {
 	public ResponseEntity<InvoicedetailEntity> saveInvoicedetail(@RequestBody InvoicedetailEntity request){
 		if (request != null) {
 			InvoicedetailEntity entity = new InvoicedetailEntity();
-			entity.setDeId(request.getDeId());
 			entity.setDeWaold(request.getDeWaold());
 			entity.setDeLiold(request.getDeLiold());
 			entity.setDeWanew(request.getDeWanew());
@@ -86,7 +85,7 @@ public class InvoicedetailController {
 			entity.setDeTotal(request.getDeTotal());
 			entity.setInStart(request.getInStart());
 			entity.setInEnd(request.getInEnd());
-			entity.setRentId(request.getRentId());
+			entity.setInId(request.getInId());
 		return ResponseEntity.ok(invoicedetailRepository.save(entity));
 		}else {
 			return ResponseEntity.badRequest().body(null);
@@ -111,7 +110,7 @@ public class InvoicedetailController {
 				updateEntity.setDeTotal(request.getDeTotal());
 				updateEntity.setInStart(request.getInStart());
 				updateEntity.setInEnd(request.getInEnd());	
-				updateEntity.setRentId(request.getRentId());
+				updateEntity.setInId(request.getInId());
 				return ResponseEntity.ok(invoicedetailRepository.save(updateEntity));
 			}else {
 				return ResponseEntity.badRequest().body(null);
