@@ -101,7 +101,7 @@ public class RentController {
 	public ResponseEntity<RentEntity> saveRent(@RequestBody RentEntity request) {
 		if (request != null) {
 			RentEntity entity = new RentEntity();
-			entity.setRentId(request.getRentId());
+//			entity.setRentId(request.getRentId());
 			entity.setRentStart(request.getRentStart());
 			entity.setRentEnd(request.getRentEnd());
 			entity.setRentInsurance(request.getRentInsurance());
@@ -117,11 +117,10 @@ public class RentController {
 				room.get().setRoomStatus("2");
 				roomRepository.save(room.get());
 			}
-			rentRepository.save(entity);
+			entity = rentRepository.save(entity);
 
 			// SendEmailRegister
 			sendEmailService.sendEmailRegister(entity.getRentId());
-
 			return ResponseEntity.ok(entity);
 		} else {
 			return ResponseEntity.badRequest().body(null);
