@@ -126,14 +126,14 @@ public class ReportService {
 		return out;
 	}
 
-	public ByteArrayOutputStream generateBillPaymentReport(Integer inId) throws IOException {
-		log.info("generateBillPaymentReport : Start :: inId : " + inId);
+	public ByteArrayOutputStream generateBillPaymentReport(Integer InId) throws IOException {
+		log.info("generateBillPaymentReport : Start :: inId : " + InId);
 		ByteArrayOutputStream out = null;
 		try {
-			Optional<InvoiceEntity> invoiceOptional = invoiceRepository.findById(inId);
+			Optional<InvoiceEntity> invoiceOptional = invoiceRepository.findById(InId);
 			InvoiceEntity invoice = invoiceOptional.get();
 			
-			Optional<InvoicedetailEntity> invoiceDetailOptional = invoicedetailRepository.findByInId(inId);
+			Optional<InvoicedetailEntity> invoiceDetailOptional = invoicedetailRepository.findByInId(InId);
 			InvoicedetailEntity invoiceDetail = invoiceDetailOptional.get();
 			
 			Optional<RentEntity> entity = rentRepository.findById(invoice.getRentId());
@@ -168,9 +168,9 @@ public class ReportService {
 			}
 
 		} catch (Exception e) {
-			log.error("generateBilldrugReport Error : {} ", e);
+			log.error("generateBillPaymentReport Error : {} ", e);
 		}
-		log.info("generateBilldrugReport : End");
+		log.info("generateBillPaymentReport : End");
 
 //		try(OutputStream outputStream = new FileOutputStream("D:\\File-report\\test.pdf")) {
 //		    out.writeTo(outputStream);
@@ -178,11 +178,11 @@ public class ReportService {
 		return out;
 	}
 
-	private Integer getInt(String str) {
-		if (StringUtils.isNoneBlank(str)) {
-			return new Integer(str);
-		}
-		return 0;
-	}
+//	private Integer getInt(String str) {
+//		if (StringUtils.isNoneBlank(str)) {
+//			return new Integer(str);
+//		}
+//		return 0;
+//	}
 
 }
