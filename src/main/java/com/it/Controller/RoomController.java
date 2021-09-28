@@ -85,4 +85,18 @@ public class RoomController {
 
 	}
 
+	@PostMapping("/room/updateLightAndWater")
+	public ResponseEntity<RoomEntity> updateLightAndWater(@RequestBody RoomEntity request) {
+		if (request != null) {
+			Optional<RoomEntity> opEntity = roomRepository.findById(request.getRoomId());
+			if (opEntity.isPresent()) {
+				RoomEntity entity = opEntity.get();
+				entity.setRoomLight(request.getRoomLight());
+				entity.setRoomWater(request.getRoomWater());
+				return ResponseEntity.ok(roomRepository.save(entity));
+			}
+		}
+		return ResponseEntity.badRequest().body(null);
+	}
+
 }//
