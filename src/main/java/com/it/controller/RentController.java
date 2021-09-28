@@ -1,10 +1,7 @@
 package com.it.Controller;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -63,11 +60,13 @@ public class RentController {
 				Optional<UserEntity> userEntity = userRepository.findById(entity.getUserId());
 				if (userEntity.isPresent()) {
 					response.setUser(modelMapper.map(userEntity.get(), UserResponse.class));
-				}
+					
+				
 		//set room	
 				Optional<RoomEntity> roomEntity = roomRepository.findById(String.valueOf(entity.getRoomId()));//ถ้าเป็น autokey ให้ใส่ Integer.valueOf
 				if (roomEntity.isPresent()) {
 					response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
+				}
 				}
 				return response;
 			}
@@ -124,12 +123,14 @@ public class RentController {
 				room.get().setRoomStatus("2");
 				roomRepository.save(room.get());
 			}
-			sendMail(request.getRentId());
+//			sendMail(request.getRentId());
 		return ResponseEntity.ok(rentRepository.save(entity));
-		}else {
+		
+		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
 		}
+	
 	
 	@PostMapping("/rent/update")
 	public ResponseEntity<RentEntity> updateRent(@RequestBody RentEntity request){
@@ -180,7 +181,7 @@ public class RentController {
 			String subject = "";
 			
 			StringBuilder text = new StringBuilder();
-			text.append("UserName : " + user.getUserName());
+			text.append("UserName : " + user.getUserUsername());
 			text.append("PassWord : " + user.getUserPhone());
 			sendEmailUtils.sendMail(user.getUserEmail(), subject, text.toString(), tempFile.toFile());
 			Files.delete(tempFile);

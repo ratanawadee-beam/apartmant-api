@@ -20,7 +20,7 @@ public class RoomResponse implements Serializable{
 	private Integer roomPrice;
 	private String  roomLight;
 	private String roomWater;
-	private String roomStatvs;
+	private String roomStatus;
 	
 	
 	

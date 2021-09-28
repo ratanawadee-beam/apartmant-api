@@ -29,8 +29,9 @@ public class UserResponse implements Serializable {
 	private String userEmail;
 	private String RoleId;
 	private String zipCode;
+	private String roomId;
 	private RoleResponse role;
-	//private RentResponse rent;
+	private RoomResponse room;
 	//private InvoiceResponse invoice;
 
 }

@@ -114,7 +114,7 @@ public class PaymentController {
 		if (request != null) {
 			PaymentEntity entity = new PaymentEntity();
 			entity.setPayId(request.getPayId());
-			entity.setPayDate(request.getPayDate() != null ? entity.getPayDate() : new Date());
+			entity.setPayDate(request.getPayDate());
 			entity.setPayTotal(request.getPayTotal());
 			entity.setInId(request.getInId());
 			return ResponseEntity.ok(paymentRepository.save(entity));
@@ -134,10 +134,7 @@ public class PaymentController {
 				PaymentEntity updateEntity = entity.get();
 				updateEntity.setPayTotal(request.getPayTotal());
 				updateEntity.setInId(request.getInId());
-				if (request.getPayDate() != null) {
-					updateEntity.setPayDate(request.getPayDate());
-				}
-
+				updateEntity.setPayDate(request.getPayDate());
 				return ResponseEntity.ok(paymentRepository.save(updateEntity));
 			} else {
 				return ResponseEntity.badRequest().body(null);

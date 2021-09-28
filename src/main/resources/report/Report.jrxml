@@ -45,26 +45,26 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="421" splitType="Stretch">
+		<band height="561" splitType="Stretch">
 			<staticText>
-				<reportElement x="42" y="7" width="470" height="103" uuid="2a83a9d2-2206-4a05-9d19-2c88d7e8eb7a"/>
+				<reportElement x="57" y="6" width="470" height="103" uuid="2a83a9d2-2206-4a05-9d19-2c88d7e8eb7a"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
-				<text><![CDATA[	ข้าพเจ้า........................................................................เลขบัตรประชาชน.........................................
+				<text><![CDATA[	ข้าพเจ้า........................................................................เลขบัตรประชาชน..........................................
 เพศ...............วัน/เดือน/ปี เกิด.............................เบอร์โทร..................................อีเมล....................................
 	ขอทำหนังสือสัญญาเช่าอพาร์ตเมนต์วันที่เข้าพัก............................วันที่สิ้นสุด................................
-เลขที่ห้อง...............................ประเภทห้อง...............................     ค่าเช่าห้องเดือนละ.............................บาท อยู่ได้ไม่เกิน.....................คน]]></text>
+เลขที่ห้อง...............................ประเภทห้อง...............................ค่าเช่าห้องเดือนละ.............................บาท อยู่ได้ไม่เกิน.....................คน]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="132" y="6" width="194" height="20" uuid="451d6563-f39d-45a8-9fea-0a9f3735c1f3"/>
+				<reportElement x="151" y="6" width="194" height="20" uuid="451d6563-f39d-45a8-9fea-0a9f3735c1f3"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{userTitle}+" "+$P{userName}+" "+$P{userLasname}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="57" y="110" width="451" height="173" uuid="55579557-1ab6-4ae0-99de-45de56b1710f"/>
+				<reportElement x="61" y="109" width="451" height="173" uuid="55579557-1ab6-4ae0-99de-45de56b1710f"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
@@ -74,77 +74,77 @@
 	3. การจ่ายค่าเช่าให้จ่ายเกินกำหนดได้ไม่เกิน 10 วัน นับจากวันที่ต้องชำระค่าเช่า ถ้าเกินกำหนด   ปรับเพิ่มวันละ 100 บาท แตรวมแล้วยอดค้างชำระต้องไม่เกิน 2 เดือน การผิดนัดชำระค่าเช่าตามที่ตกลงกัน ไว้ในสัญญาเช่านี้ ผู้เช่ามีสิทธิ์ยกเลิกการให้เช่า และผู้เช่าต้องย้ายออกทันที]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="382" y="5" width="113" height="22" uuid="1986fd20-01cb-46f2-9512-eed21f3e7c1b"/>
+				<reportElement x="402" y="5" width="113" height="22" uuid="1986fd20-01cb-46f2-9512-eed21f3e7c1b"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{userIdcard}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="65" y="23" width="80" height="26" uuid="7aa468aa-901c-4a1f-8de1-45bb7451da06"/>
+				<reportElement x="81" y="22" width="80" height="26" uuid="7aa468aa-901c-4a1f-8de1-45bb7451da06"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{userGender}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="172" y="23" width="78" height="28" uuid="e0b56745-78e5-457f-8554-2eba1c2839a6"/>
+				<reportElement x="191" y="22" width="78" height="28" uuid="e0b56745-78e5-457f-8554-2eba1c2839a6"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{userBirthday}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="287" y="23" width="100" height="25" uuid="f61ac2de-3fbf-45ff-8bea-cf5ad34d3313"/>
+				<reportElement x="305" y="22" width="100" height="25" uuid="f61ac2de-3fbf-45ff-8bea-cf5ad34d3313"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{userPhone}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="393" y="25" width="100" height="22" uuid="97096c9b-b139-4c67-96f3-de6b1a37dfc4"/>
+				<reportElement x="410" y="24" width="100" height="22" uuid="97096c9b-b139-4c67-96f3-de6b1a37dfc4"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{userEmail}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="283" y="40" width="100" height="19" uuid="badcda98-69d0-4929-b1ee-c15727eb3945"/>
+				<reportElement x="301" y="41" width="100" height="19" uuid="badcda98-69d0-4929-b1ee-c15727eb3945"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{rentStart}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="399" y="41" width="70" height="20" uuid="0b87ff76-09fb-4c5d-ab2f-f75f341fe435"/>
+				<reportElement x="418" y="41" width="70" height="20" uuid="0b87ff76-09fb-4c5d-ab2f-f75f341fe435"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{rentEnd}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="92" y="60" width="88" height="19" uuid="9d36e674-d1c6-4b1b-959d-355743ce3a55"/>
+				<reportElement x="116" y="57" width="88" height="19" uuid="9d36e674-d1c6-4b1b-959d-355743ce3a55"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{roomId}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="224" y="59" width="90" height="26" uuid="08ceab33-0e47-4dac-8690-411ee524ae04"/>
+				<reportElement x="247" y="58" width="90" height="26" uuid="08ceab33-0e47-4dac-8690-411ee524ae04"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{roomTypename}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="396" y="59" width="84" height="20" uuid="cc6c5bb2-8f2c-4bde-b5f9-486322bf4bcb"/>
+				<reportElement x="404" y="58" width="84" height="20" uuid="cc6c5bb2-8f2c-4bde-b5f9-486322bf4bcb"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{roomPrice}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="40" y="293" width="100" height="50" uuid="68a8baa5-7d85-4abc-a96a-e1907067b27b"/>
+				<reportElement x="61" y="288" width="100" height="50" uuid="68a8baa5-7d85-4abc-a96a-e1907067b27b"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
@@ -152,7 +152,7 @@
     - รายละเอียดดังนี้ ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="320" width="190" height="100" uuid="db55722d-8c2c-4acc-a6fd-617bd5fd37a6"/>
+				<reportElement x="180" y="335" width="190" height="100" uuid="db55722d-8c2c-4acc-a6fd-617bd5fd37a6"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
@@ -163,32 +163,28 @@
 ค่าน้ำเหมาจ่าย 150 บาท]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="245" y="317" width="109" height="29" uuid="e81ef305-3838-456d-8fee-c298ef1dfa6b"/>
+				<reportElement x="253" y="332" width="109" height="29" uuid="e81ef305-3838-456d-8fee-c298ef1dfa6b"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{roomPrice}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="247" y="335" width="100" height="20" uuid="f04a21f4-4212-4281-8119-5c55996ea6bc"/>
+				<reportElement x="253" y="351" width="100" height="20" uuid="f04a21f4-4212-4281-8119-5c55996ea6bc"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{rentOther}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="250" y="354" width="92" height="23" uuid="201b27d8-6943-40f6-a1a4-d883b5ffc3a1"/>
+				<reportElement x="251" y="369" width="92" height="23" uuid="201b27d8-6943-40f6-a1a4-d883b5ffc3a1"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{rentInsurance}]]></textFieldExpression>
 			</textField>
-		</band>
-	</pageHeader>
-	<columnFooter>
-		<band height="162" splitType="Stretch">
 			<staticText>
-				<reportElement x="281" y="0" width="230" height="20" uuid="b1bb0f7f-e370-4920-8d86-db445eef06b6"/>
+				<reportElement x="290" y="440" width="230" height="20" uuid="b1bb0f7f-e370-4920-8d86-db445eef06b6"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
@@ -196,43 +192,43 @@
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="305" y="20" width="182" height="20" uuid="c72db0d2-6d06-4b80-886e-5fadbfbfafa2"/>
+				<reportElement x="314" y="460" width="182" height="20" uuid="c72db0d2-6d06-4b80-886e-5fadbfbfafa2"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<text><![CDATA[ลงชื่อ................................................ผู้เช่า]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="60" width="192" height="20" uuid="f6bc3d08-e03d-4278-b1fd-8bd6d0159728"/>
+				<reportElement x="328" y="480" width="147" height="20" uuid="d50bca9e-63a3-4d82-b80e-3b43494d9903"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="16"/>
+				</textElement>
+				<text><![CDATA[(                                      )]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="500" width="192" height="20" uuid="f6bc3d08-e03d-4278-b1fd-8bd6d0159728"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<text><![CDATA[ลงชื่อ................................................ผู้รวมเช่า]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="314" y="40" width="151" height="20" uuid="d50bca9e-63a3-4d82-b80e-3b43494d9903"/>
+				<reportElement x="328" y="520" width="156" height="20" uuid="6e0873c7-b3fe-4936-b131-57a5e64e3fb9"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
-				<text><![CDATA[(                                                     )]]></text>
+				<text><![CDATA[(                                       )]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="311" y="80" width="151" height="20" uuid="6e0873c7-b3fe-4936-b131-57a5e64e3fb9"/>
-				<textElement>
-					<font fontName="TH SarabunPSK" size="16"/>
-				</textElement>
-				<text><![CDATA[(                                                     )]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="302" y="100" width="178" height="21" uuid="91867a75-9283-45bd-83a3-efe40d3bd87b"/>
+				<reportElement x="312" y="540" width="178" height="21" uuid="91867a75-9283-45bd-83a3-efe40d3bd87b"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="16"/>
 				</textElement>
 				<text><![CDATA[วันที่..........เดือน......................ปี............. ]]></text>
 			</staticText>
 		</band>
+	</pageHeader>
+	<columnFooter>
+		<band height="162" splitType="Stretch"/>
 	</columnFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

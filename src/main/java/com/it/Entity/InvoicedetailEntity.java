@@ -25,7 +25,7 @@ public class InvoicedetailEntity {
 	private String deTotal;
 	private String InStart;
 	private String InEnd;
-	private String InId;
+	private Integer rentId;
 	public Integer getDeId() {
 		return deId;
 	}
@@ -104,12 +104,13 @@ public class InvoicedetailEntity {
 	public void setInEnd(String inEnd) {
 		InEnd = inEnd;
 	}
-	public String getInId() {
-		return InId;
+	public Integer getRentId() {
+		return rentId;
 	}
-	public void setInId(String inId) {
-		InId = inId;
+	public void setRentId(Integer rentId) {
+		this.rentId = rentId;
 	}
+
 	
 }
 

@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.it.Entity.RoleEntity;
+import com.it.Entity.RoomEntity;
 import com.it.Entity.UserEntity;
 import com.it.Repository.RoleRepository;
+import com.it.Repository.RoomRepository;
 import com.it.Repository.UserRepository;
 import com.it.dto.UserDto;
 import com.it.model.RoleResponse;
+import com.it.model.RoomResponse;
 import com.it.model.UserResponse;
 import com.it.utils.PasswordEncryptorUtils;
 
@@ -33,6 +36,8 @@ public class UserController {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private RoomRepository roomRepository;
 	@Autowired 
 	private ModelMapper modelMapper;
 	
@@ -48,6 +53,13 @@ public class UserController {
 		if (roleEntity.isPresent()) {
 			response.setRole(modelMapper.map(roleEntity.get(), RoleResponse.class));
 		}	
+		
+		//set room	
+				Optional<RoomEntity> roomEntity = roomRepository.findById(String.valueOf(entity.getRoomId()));//ถ้าเป็น autokey ให้ใส่ Integer.valueOf
+				if (roomEntity.isPresent()) {
+					response.setRoom(modelMapper.map(roomEntity.get(), RoomResponse.class));
+				}
+		
 		return response;
 	}
 
@@ -91,6 +103,7 @@ public class UserController {
 			entity.setUserEmail(request.getUserEmail());
 			entity.setRoleId(request.getRoleId());
 			entity.setZipCode(request.getZipCode());
+			entity.setRoomId(request.getRoomId());
 //			rentController.saveRent(request)
 	return ResponseEntity.ok(userRepository.save(entity));
 
@@ -120,6 +133,7 @@ public class UserController {
 				updateEntity.setUserEmail(request.getUserEmail());
 				updateEntity.setRoleId(request.getRoleId());
 				updateEntity.setZipCode(request.getZipCode());
+				updateEntity.setRoomId(request.getRoomId());
 				return ResponseEntity.ok(userRepository.save(updateEntity));
 			}else {
 				return ResponseEntity.badRequest().body(null);

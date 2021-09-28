@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.it.Entity.AmphurEntity;
-import com.it.Entity.DistrictEntity;
+
 import com.it.Entity.InvoiceEntity;
-import com.it.Entity.PaymentEntity;
-import com.it.Entity.ProvinceEntity;
+
 import com.it.Entity.RentEntity;
 import com.it.Entity.RoomEntity;
 import com.it.Entity.UserEntity;
@@ -27,11 +24,9 @@ import com.it.Repository.InvoiceRepository;
 import com.it.Repository.RentRepository;
 import com.it.Repository.RoomRepository;
 import com.it.Repository.UserRepository;
-import com.it.model.AmphurResponse;
-import com.it.model.DistrictResponse;
+
 import com.it.model.InvoiceResponse;
-import com.it.model.PaymentResponse;
-import com.it.model.ProvinceResponse;
+
 import com.it.model.RentResponse;
 import com.it.model.RoomResponse;
 import com.it.model.UserResponse;
@@ -78,7 +73,7 @@ public class InvoiceController {
 //		return response;
 //	}
 
-	private InvoiceResponse convertToResponse(InvoiceEntity entity) {
+	public InvoiceResponse convertToResponse(InvoiceEntity entity) {
 		InvoiceResponse response = modelMapper.map(entity, InvoiceResponse.class);
 
 		Optional<RentEntity> rentEntity = rentRepository.findById(entity.getRentId());
@@ -128,6 +123,8 @@ public class InvoiceController {
 			entity.setInStetus(request.getInStetus());
 			entity.setInStart(request.getInStart());
 			entity.setInEnd(request.getInEnd());
+			entity.setRoomId(request.getRoomId());
+			entity.setUserId(request.getUserId());
 			entity.setRentId(request.getRentId());
 			
 	return ResponseEntity.ok(invoiceRepository.save(entity));
@@ -160,6 +157,22 @@ public class InvoiceController {
 			}
 			
 		}
+	
+	@GetMapping("/invoice/by-userId{userId}")
+	public ResponseEntity<List<InvoiceResponse>> invoiceByuserId(@PathVariable("userId") String userId){
+//		Optional<RentEntity> entity = rentRepository.findByUserId(userId);
+//		if (null != entity && entity.size() > 0) {
+			Optional<InvoiceEntity> entity = invoiceRepository.findByUserId(userId);
+			if (entity.isPresent()) {
+			return ResponseEntity.ok(entity.stream().map(this::convertToResponse).collect(Collectors.toList()));
+		}else {
+			return ResponseEntity.badRequest().body(null);
+		}
+	}
+	
+
+	
+	
 	
 	}//
 

@@ -14,7 +14,7 @@ public class PaymentEntity {
 
 	@Id
 	private Integer  payId;
-	private Date payDate;
+	private String payDate;
 	private String payTotal;
 	private Integer InId;
 	public Integer getPayId() {
@@ -23,10 +23,11 @@ public class PaymentEntity {
 	public void setPayId(Integer payId) {
 		this.payId = payId;
 	}
-	public Date getPayDate() {
+	
+	public String getPayDate() {
 		return payDate;
 	}
-	public void setPayDate(Date payDate) {
+	public void setPayDate(String payDate) {
 		this.payDate = payDate;
 	}
 	public String getPayTotal() {

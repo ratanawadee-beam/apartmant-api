@@ -32,8 +32,8 @@ public class InvoicedetailController {
 	@Autowired
 	private InvoicedetailRepository invoicedetailRepository;
 	
-	@Autowired InvoiceRepository invoiceRepository;
-	
+	@Autowired
+	private RentRepository rentRepository;
 	
 	@Autowired 
 	private ModelMapper modelMapper;
@@ -42,9 +42,9 @@ public class InvoicedetailController {
 		InvoicedetailResponse response = modelMapper.map(entity, InvoicedetailResponse.class);
 		
 		//set invoice
-		Optional<InvoiceEntity> invoiceEntity = invoiceRepository.findById(Integer.valueOf(entity.getInId()));
-		if (invoiceEntity.isPresent()) {
-			response.setInvoice(modelMapper.map(invoiceEntity.get(), InvoiceResponse.class));
+		Optional<RentEntity> rentEntity = rentRepository.findById(entity.getRentId());
+		if (rentEntity.isPresent()) {
+			RentResponse rentResponse = modelMapper.map(rentEntity.get(), RentResponse.class);
 		}
 		return response;
   }
@@ -86,6 +86,7 @@ public class InvoicedetailController {
 			entity.setDeTotal(request.getDeTotal());
 			entity.setInStart(request.getInStart());
 			entity.setInEnd(request.getInEnd());
+			entity.setRentId(request.getRentId());
 		return ResponseEntity.ok(invoicedetailRepository.save(entity));
 		}else {
 			return ResponseEntity.badRequest().body(null);
@@ -109,7 +110,8 @@ public class InvoicedetailController {
 				updateEntity.setTotalWa(request.getTotalWa());
 				updateEntity.setDeTotal(request.getDeTotal());
 				updateEntity.setInStart(request.getInStart());
-				updateEntity.setInEnd(request.getInEnd());			
+				updateEntity.setInEnd(request.getInEnd());	
+				updateEntity.setRentId(request.getRentId());
 				return ResponseEntity.ok(invoicedetailRepository.save(updateEntity));
 			}else {
 				return ResponseEntity.badRequest().body(null);

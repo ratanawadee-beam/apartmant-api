@@ -14,6 +14,8 @@ public class UserDto {
 	private String userEmail;
 	private String RoleId;
 	private String zipCode;
+	private String roomId;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -85,6 +87,12 @@ public class UserDto {
 	}
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+	public String getRoomId() {
+		return roomId;
+	}
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
 	}
 	
 }

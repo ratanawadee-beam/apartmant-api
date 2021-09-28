@@ -31,6 +31,6 @@ public class InvoicedetailResponse  implements Serializable {
 	private String deTotal;
 	private String InStart;
 	private String InEnd;
-	private String InId;
-	private InvoiceResponse invoice;
+	private Integer rentId;
+	private RentResponse rent;
 }
