@@ -151,10 +151,10 @@ public class ReportService {
 				parameters.put("userLasname", rent.getUser().getUserLasname());
 				parameters.put("inStart", invoice.getInStart());
 				parameters.put("inEnd", invoice.getInEnd());
-				parameters.put("inId", invoice.getInId());
+				parameters.put("inId", invoice.getInId().toString());
 				parameters.put("roomLight", rent.getRoom().getRoomLight());
-				parameters.put("deLinew", invoiceDetail.getDeLinew());
-				parameters.put("totalunitLi", invoiceDetail.getTotalunitLi());
+				parameters.put("deLinew", invoiceDetail.getDeLinew().toString());
+				parameters.put("totalunitLi", invoiceDetail.getTotalunitLi().toString());
 				parameters.put("rentLi", rent.getRentLi());
 				parameters.put("roomPrice", rent.getRoom().getRoomPrice().toString());
 				parameters.put("totalLi", invoiceDetail.getTotalLi());
