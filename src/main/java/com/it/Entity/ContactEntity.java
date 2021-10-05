@@ -11,7 +11,9 @@ public class ContactEntity {
 	@Id
 	private Integer conId;
 	private String conName;
+	private String conLastname;
 	private String conPhone;
+	private String conCategory;
 	private String conText;
 	private String roomId;
 	private String userId;
@@ -27,11 +29,23 @@ public class ContactEntity {
 	public void setConName(String conName) {
 		this.conName = conName;
 	}
+	public String getConLastname() {
+		return conLastname;
+	}
+	public void setConLastname(String conLastname) {
+		this.conLastname = conLastname;
+	}
 	public String getConPhone() {
 		return conPhone;
 	}
 	public void setConPhone(String conPhone) {
 		this.conPhone = conPhone;
+	}
+	public String getConCategory() {
+		return conCategory;
+	}
+	public void setConCategory(String conCategory) {
+		this.conCategory = conCategory;
 	}
 	public String getConText() {
 		return conText;
@@ -51,6 +65,5 @@ public class ContactEntity {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
 	
 }

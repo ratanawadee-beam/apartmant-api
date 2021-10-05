@@ -1,12 +1,22 @@
 package com.it.service;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
@@ -25,6 +35,7 @@ import com.it.Repository.InvoicedetailRepository;
 import com.it.Repository.RentRepository;
 import com.it.model.InvoiceResponse;
 import com.it.model.RentResponse;
+import com.it.utils.QRPromptPayUtils;
 
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -51,6 +62,9 @@ public class ReportService {
 	
 	@Autowired
 	private InvoicedetailRepository invoicedetailRepository;
+	
+	@Autowired
+	private QRPromptPayUtils qrPromptPayUtils;
 
 	public ByteArrayOutputStream generateReport() throws IOException {
 		log.info("generateReport : Start");
@@ -160,7 +174,12 @@ public class ReportService {
 				parameters.put("totalLi", invoiceDetail.getTotalLi());
 				parameters.put("totalWa", invoiceDetail.getTotalWa());
 				parameters.put("deTotal", invoiceDetail.getDeTotal());
-
+				
+//				byte[] array = Files.readAllBytes(Paths.get("C:/Users/Beam/Desktop/QRCode.png"));
+				
+				byte[] array = qrPromptPayUtils.generateQRCodeToByteArray(new BigDecimal(invoiceDetail.getDeTotal()));
+				parameters.put("imageQRCode", new ByteArrayInputStream(array));
+				
 				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
 				out = new ByteArrayOutputStream();
 
@@ -184,5 +203,15 @@ public class ReportService {
 //		}
 //		return 0;
 //	}
+	public byte[] extractBytes (String ImageName) throws IOException {
+		 // open image
+		 File imgPath = new File(ImageName);
+		 BufferedImage bufferedImage = ImageIO.read(imgPath);
 
+		 // get DataBufferBytes from Raster
+		 WritableRaster raster = bufferedImage .getRaster();
+		 DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
+
+		 return ( data.getData() );
+		}
 }

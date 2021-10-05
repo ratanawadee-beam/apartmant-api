@@ -15,8 +15,10 @@ public class ContactRespons {
 
 private Integer conId;
 private String conName;
+private String conLastname;
 private String conPhone;
-private String conIext;
+private String conCategory;
+private String conText;
 private String roomId;
 private String userId;
 

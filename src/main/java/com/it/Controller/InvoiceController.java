@@ -1,5 +1,18 @@
 package com.it.Controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -7,12 +20,19 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections.CollectionUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.it.Entity.InvoiceEntity;
 
@@ -29,6 +49,8 @@ import com.it.model.InvoiceResponse;
 import com.it.model.RentResponse;
 import com.it.model.RoomResponse;
 import com.it.model.UserResponse;
+import com.it.service.SendEmailService;
+import com.it.utils.ReportUtils;
 
 @RestController
 
@@ -48,6 +70,8 @@ public class InvoiceController {
 
 	@Autowired
 	private ModelMapper modelMapper;
+
+
 
 //	private  InvoiceResponse convertToResponse(InvoiceEntity entity) {
 //		InvoiceResponse response = new InvoiceResponse();
@@ -125,8 +149,14 @@ public class InvoiceController {
 			entity.setUserId(request.getUserId());
 			entity.setRentId(request.getRentId());
 
-			return ResponseEntity.ok(invoiceRepository.save(entity));
+			invoiceRepository.save(entity);
+			// return ResponseEntity.ok(invoiceRepository.save(entity));
 
+			// sendEmailPayment
+//			List<Integer> inIds = new ArrayList<>();
+//			inIds.add(entity.getInId());
+//			sendEmailService.sendEmailPayment(inIds);
+			return ResponseEntity.ok(entity);
 		} else {
 			return ResponseEntity.badRequest().body(null);
 		}
@@ -167,5 +197,7 @@ public class InvoiceController {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
+
+	
 
 }//

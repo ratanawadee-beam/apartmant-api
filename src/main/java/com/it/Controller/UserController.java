@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.it.Entity.RoleEntity;
 import com.it.Entity.RoomEntity;
 import com.it.Entity.UserEntity;
+import com.it.Repository.RentRepository;
 import com.it.Repository.RoleRepository;
 import com.it.Repository.RoomRepository;
 import com.it.Repository.UserRepository;

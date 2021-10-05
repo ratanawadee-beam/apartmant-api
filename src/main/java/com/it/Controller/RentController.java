@@ -152,7 +152,7 @@ public class RentController {
 	}
 
 	@DeleteMapping("/rent/{rentId}")
-	public ResponseEntity<String> deleteRentByRentId(@PathVariable("rentId") String rentId) {
+	public ResponseEntity<String> deleteRentByRentId(@PathVariable("rentId") Integer rentId) {
 		rentRepository.deleteById(Integer.valueOf(rentId));
 		return ResponseEntity.ok("SUCCESS");
 	}

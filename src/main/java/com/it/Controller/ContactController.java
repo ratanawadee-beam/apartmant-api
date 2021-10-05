@@ -44,7 +44,9 @@ public class ContactController {
 			
 			entity.setConId(request.getConId());
 			entity.setConName(request.getConName());
+			entity.setConLastname(request.getConLastname());
 			entity.setConPhone(request.getConPhone());
+			entity.setConCategory(request.getConCategory());
 			entity.setConText(request.getConText());
 			entity.setRoomId(request.getRoomId());
 			entity.setUserId(request.getUserId());
@@ -66,7 +68,9 @@ public class ContactController {
 				//set update data form request
 				ContactEntity updateEntity = entity.get();
 				updateEntity.setConName(request.getConName());
+				updateEntity.setConLastname(request.getConLastname());
 				updateEntity.setConPhone(request.getConPhone());
+				updateEntity.setConCategory(request.getConCategory());
 				updateEntity.setConText(request.getConText());
 				updateEntity.setRoomId(request.getRoomId());
 				updateEntity.setUserId(request.getUserId());

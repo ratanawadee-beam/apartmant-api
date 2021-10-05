@@ -22,6 +22,7 @@ public class InvoiceEntity {
 	private Integer rentId;
 	private String roomId;
 	private String userId;
+	
 	public Integer getInId() {
 		return InId;
 	}

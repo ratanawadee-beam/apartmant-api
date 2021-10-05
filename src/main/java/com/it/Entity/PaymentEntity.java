@@ -17,6 +17,7 @@ public class PaymentEntity {
 	private String payDate;
 	private String payTotal;
 	private Integer InId;
+	private String fileName;
 	public Integer getPayId() {
 		return payId;
 	}
@@ -41,6 +42,12 @@ public class PaymentEntity {
 	}
 	public void setInId(Integer inId) {
 		InId = inId;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	
 }
