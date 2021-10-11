@@ -88,7 +88,7 @@ public class SendEmailService {
 			String subject = "แจ้งหนี้";
 
 			StringBuilder text = new StringBuilder();
-			text.append("แจ้งหนี้");
+			text.append("บิลค่าเช่าห้องพัก");
 
 			sendEmailUtils.sendMail(user.getUserEmail(), subject, text.toString(), tempFile.toFile());
 			Files.delete(tempFile);

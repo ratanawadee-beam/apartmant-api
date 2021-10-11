@@ -160,7 +160,7 @@ public class ReportService {
 				// parameter
 				Map<String, Object> parameters = new HashMap<>();
 				parameters.put("roomId", rent.getRoom().getRoomId());
-				parameters.put("roomTypeName", rent.getRoom().getRoomTypename());
+				parameters.put("roomTypename", rent.getRoom().getRoomTypename());
 				parameters.put("userName", rent.getUser().getUserName());
 				parameters.put("userLasname", rent.getUser().getUserLasname());
 				parameters.put("inStart", invoice.getInStart());

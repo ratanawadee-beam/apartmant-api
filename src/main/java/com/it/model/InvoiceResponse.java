@@ -20,6 +20,7 @@ public class InvoiceResponse implements Serializable {
 	private String InStatus;
 	private String InStart;
 	private String InEnd;
+	private Integer InTotal;
 	private Integer rentId;
 	private String roomId;
 	private String userId;

@@ -24,6 +24,7 @@ public class UserEntity {
 	private String userEmail;
 	private String RoleId; 
 	private String zipCode;
+	private Integer DistrictId;
 	private String roomId;
 	public String getUserId() {
 		return userId;
@@ -114,6 +115,12 @@ public class UserEntity {
 	}
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
+	}
+	public Integer getDistrictId() {
+		return DistrictId;
+	}
+	public void setDistrictId(Integer districtId) {
+		DistrictId = districtId;
 	}
 	
 }

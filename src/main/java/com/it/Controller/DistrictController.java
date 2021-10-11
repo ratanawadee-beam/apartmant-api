@@ -52,7 +52,7 @@ public class DistrictController {
 			if (amphurEntity.isPresent()) {
 				response.setAmphur(modelMapper.map(amphurEntity.get(), AmphurResponse.class));
 
-				Optional<ProvinceEntity> provinceEntity = provinceRepository.findById(amphurEntity.get().getAmphurId());
+				Optional<ProvinceEntity> provinceEntity = provinceRepository.findById(amphurEntity.get().getProvinceId());
 				if (provinceEntity.isPresent()) {
 					response.setProvince(modelMapper.map(provinceEntity.get(), ProvinceResponse.class));
 				}
@@ -61,10 +61,10 @@ public class DistrictController {
 		return response;
 	}
 
-	@GetMapping("/district")
-	public ResponseEntity<List<DistrictResponse>> getAllDistrict() {
+	@GetMapping("/district/zipCode")
+	public ResponseEntity<List<DistrictResponse>> getAllDistrict(@RequestParam("zipCode") String zipCode) {
 		List<DistrictResponse> response = new ArrayList<>();
-		List<DistrictEntity> entities = districtRepository.findAll();
+		List<DistrictEntity> entities = districtRepository.findByZipCode(zipCode);
 		if (CollectionUtils.isNotEmpty(entities)) {
 			response = entities.stream().map(this::converToResponse).collect(Collectors.toList());
 		}
@@ -97,7 +97,6 @@ public class DistrictController {
 		}
 
 	}
-
 	@PostMapping("/district/save")
 	public ResponseEntity<DistrictEntity> saveDistrict(@RequestBody DistrictEntity request) {
 		if (request != null) {

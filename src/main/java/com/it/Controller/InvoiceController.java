@@ -26,6 +26,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -145,6 +146,7 @@ public class InvoiceController {
 			entity.setInStatus(request.getInStatus());
 			entity.setInStart(request.getInStart());
 			entity.setInEnd(request.getInEnd());
+			entity.setInTotal(request.getInTotal());
 			entity.setRoomId(request.getRoomId());
 			entity.setUserId(request.getUserId());
 			entity.setRentId(request.getRentId());
@@ -173,6 +175,7 @@ public class InvoiceController {
 				updateEntity.setInStatus(request.getInStatus());
 				updateEntity.setInStart(request.getInStart());
 				updateEntity.setInEnd(request.getInEnd());
+				updateEntity.setInTotal(request.getInTotal());
 				updateEntity.setRentId(request.getRentId());
 
 				return ResponseEntity.ok(invoiceRepository.save(updateEntity));
@@ -198,6 +201,10 @@ public class InvoiceController {
 		}
 	}
 
-	
+	@DeleteMapping("/invoice/{rentId}")
+	public ResponseEntity<String> deleteinvoiceByInId(@PathVariable("rentId") Integer rentId) {
+		invoiceRepository.deleteById(Integer.valueOf(rentId));
+		return ResponseEntity.ok("SUCCESS");
+	}
 
 }//

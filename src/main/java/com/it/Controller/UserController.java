@@ -104,6 +104,7 @@ public class UserController {
 			entity.setUserEmail(request.getUserEmail());
 			entity.setRoleId(request.getRoleId());
 			entity.setZipCode(request.getZipCode());
+			entity.setDistrictId(request.getDistrictId());
 			entity.setRoomId(request.getRoomId());
 //			rentController.saveRent(request)
 	return ResponseEntity.ok(userRepository.save(entity));
@@ -134,6 +135,7 @@ public class UserController {
 				updateEntity.setUserEmail(request.getUserEmail());
 				updateEntity.setRoleId(request.getRoleId());
 				updateEntity.setZipCode(request.getZipCode());
+				updateEntity.setDistrictId(request.getDistrictId());
 				updateEntity.setRoomId(request.getRoomId());
 				return ResponseEntity.ok(userRepository.save(updateEntity));
 			}else {

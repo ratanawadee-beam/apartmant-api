@@ -1,7 +1,7 @@
 package com.it.Controller;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Optional;import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -93,8 +93,23 @@ public class RoomController {
 				RoomEntity entity = opEntity.get();
 				entity.setRoomLight(request.getRoomLight());
 				entity.setRoomWater(request.getRoomWater());
+				entity.setRoomTypename(request.getRoomTypename());
 				return ResponseEntity.ok(roomRepository.save(entity));
 			}
+		}
+		return ResponseEntity.badRequest().body(null);
+	}
+
+	@PostMapping("/room/updateStatus")
+	public ResponseEntity<RoomEntity> updateStatus(@RequestBody RoomEntity request) {
+		if (request != null) {
+			Optional<RoomEntity> room = roomRepository.findById(request.getRoomId());
+			if (room.isPresent()) {
+				RoomEntity entity = room.get();
+				room.get().setRoomStatus("1");
+				roomRepository.save(room.get());
+				return ResponseEntity.ok(roomRepository.save(entity));
+			}	
 		}
 		return ResponseEntity.badRequest().body(null);
 	}

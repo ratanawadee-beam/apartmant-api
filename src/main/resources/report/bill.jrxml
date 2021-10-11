@@ -53,14 +53,14 @@
 				<text><![CDATA[ใบเเจ้งยอดชำระค่าเช่า]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="14" y="83" width="100" height="30" uuid="5b69ab43-3d25-486b-a8f8-de794a597370"/>
+				<reportElement x="14" y="88" width="100" height="30" uuid="5b69ab43-3d25-486b-a8f8-de794a597370"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="18"/>
 				</textElement>
 				<text><![CDATA[หมายเลขใบเเจ้งหนี้ :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="115" y="83" width="75" height="25" uuid="f790d601-8feb-4fb7-9618-445ce401c2f8"/>
+				<reportElement x="115" y="88" width="75" height="25" uuid="f790d601-8feb-4fb7-9618-445ce401c2f8"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="18"/>
 				</textElement>
@@ -315,7 +315,7 @@
 เจ้าของอพาร์ตเมนต์คุณอนันต์มหาสารคาม]]></text>
 			</staticText>
 			<image>
-				<reportElement stretchType="RelativeToTallestObject" x="370" y="40" width="91" height="87" uuid="5185c7ca-170d-460a-aec0-b8d954c4a776"/>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="371" y="30" width="94" height="97" uuid="5185c7ca-170d-460a-aec0-b8d954c4a776"/>
 				<imageExpression><![CDATA[$P{imageQRCode}]]></imageExpression>
 			</image>
 		</band>

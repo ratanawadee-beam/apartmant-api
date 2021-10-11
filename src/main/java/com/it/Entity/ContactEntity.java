@@ -1,6 +1,8 @@
 package com.it.Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,12 +11,14 @@ import javax.persistence.Table;
 public class ContactEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer conId;
 	private String conName;
 	private String conLastname;
 	private String conPhone;
 	private String conCategory;
 	private String conText;
+	private String conFilename;
 	private String roomId;
 	private String userId;
 	public Integer getConId() {
@@ -53,6 +57,12 @@ public class ContactEntity {
 	public void setConText(String conText) {
 		this.conText = conText;
 	}
+	public String getConFilename() {
+		return conFilename;
+	}
+	public void setConFilename(String conFilename) {
+		this.conFilename = conFilename;
+	}
 	public String getRoomId() {
 		return roomId;
 	}
@@ -66,4 +76,5 @@ public class ContactEntity {
 		this.userId = userId;
 	}
 	
+
 }

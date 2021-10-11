@@ -9,6 +9,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -119,5 +120,12 @@ public class InvoicedetailController {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
+	
+	@DeleteMapping("/invoicedetail/{deId}")
+	public ResponseEntity<String> deleteinvoicedetailByDeId(@PathVariable("deId") Integer deId) {
+		invoicedetailRepository.deleteById(Integer.valueOf(deId));
+		return ResponseEntity.ok("SUCCESS");
+	}
+
 	
 }//

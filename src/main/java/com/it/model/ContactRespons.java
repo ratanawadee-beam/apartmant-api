@@ -18,6 +18,7 @@ private String conName;
 private String conLastname;
 private String conPhone;
 private String conCategory;
+private String conFilename;
 private String conText;
 private String roomId;
 private String userId;

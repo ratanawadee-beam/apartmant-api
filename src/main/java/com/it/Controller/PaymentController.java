@@ -23,6 +23,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -172,6 +173,8 @@ public class PaymentController {
 		}
 
 	}
+	
+
 
 	@PostMapping("/uploadFile")
 	public Object uploadFile(@RequestParam("multipartFile") MultipartFile multipartFile,
@@ -218,4 +221,10 @@ public class PaymentController {
 
 		return response;
 	}
-}
+	
+	@DeleteMapping("/payment/{payId}")
+	public ResponseEntity<String> deletepaymentBypayId(@PathVariable("payId") Integer payId) {
+		paymentRepository.deleteById(Integer.valueOf(payId));
+		return ResponseEntity.ok("SUCCESS");
+	}
+}//
